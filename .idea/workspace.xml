@@ -22,110 +22,106 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Ar.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/application/controllers/ar/Ar.php">
+      <file leaf-file-name="Ap.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/application/controllers/ap/Ap.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.35912937">
-              <caret line="122" column="34" selection-start-line="57" selection-start-column="8" selection-end-line="122" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.25272068">
+              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding>
-                <marker date="1537344955367" expanded="true" signature="5640:5743" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="5868:6433" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="5915:6054" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="6101:6225" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="6272:6406" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="6475:6695" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="6523:6668" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="6737:7319" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="6784:6918" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="6965:7110" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="7157:7292" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="7361:8004" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="7408:7550" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="7597:7730" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="7777:7910" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="8096:8464" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="8142:8464" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="8596:8956" placeholder="..." />
-                <marker date="1537344955367" expanded="true" signature="9829:10111" placeholder="SELECT MAX( ..gl_header..." />
-                <marker date="1537344955367" expanded="true" signature="15167:15399" placeholder="SELECT MAX( ..gl_header..." />
+                <marker date="1537353266607" expanded="true" signature="4296:4364" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="4476:4988" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="4519:4646" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="4689:4801" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="4844:4966" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="5022:5213" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="5064:5190" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="5250:5775" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="5293:5414" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="5457:5590" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="5634:5757" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="5816:6388" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="5859:5984" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="6027:6148" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="6191:6312" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="6455:6823" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="6501:6823" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="6948:7331" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="6977:7301" placeholder="..." />
+                <marker date="1537353266607" expanded="true" signature="9203:9478" placeholder="SELECT MAX( ..gl_header..." />
+                <marker date="1537353266607" expanded="true" signature="14494:14705" placeholder="SELECT MAX( ..gl_header..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="M_ar.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/models/ar/M_ar.php">
+      <file leaf-file-name="M_ap.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/models/ap/M_ap.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.701492">
-              <caret line="39" column="5" selection-start-line="35" selection-start-column="3" selection-end-line="39" selection-end-column="5" />
+            <state vertical-scroll-proportion="-0.7096774">
+              <caret line="74" column="28" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="28" />
               <folding>
-                <marker date="1537323840347" expanded="true" signature="108:350" placeholder="SELECT coa.c..coa..." />
-                <marker date="1537323840347" expanded="true" signature="465:485" placeholder="SELECT * FRO..bank..." />
-                <marker date="1537323840347" expanded="true" signature="598:632" placeholder="SELECT * FRO..tag..." />
-                <marker date="1537323840347" expanded="true" signature="764:850" placeholder="SELECT GROUP..ar_tag..." />
-                <marker date="1537323840347" expanded="true" signature="963:984" placeholder="SELECT * FRO..contact..." />
-                <marker date="1537323840347" expanded="true" signature="1131:1205" placeholder="SELECT finan..system_parameter..." />
-                <marker date="1537323840347" expanded="true" signature="1241:1324" placeholder="SELECT RIGHT..." />
-                <marker date="1537323840347" expanded="true" signature="1562:1715" placeholder="SELECT LEFT ..." />
-                <marker date="1537323840347" expanded="true" signature="1838:1991" placeholder="SELECT RIGHT..." />
-                <marker date="1537323840347" expanded="true" signature="2915:3418" placeholder="SELECT arh.*..ar_header..." />
-                <marker date="1537323840347" expanded="true" signature="3930:4144" placeholder="SELECT ar_he..ar_header..." />
-                <marker date="1537323840347" expanded="true" signature="4280:4578" placeholder="SELECT ar_de..ar_detail..." />
-                <marker date="1537323840347" expanded="true" signature="4716:4908" placeholder="SELECT ar_de..ar_detail..." />
-                <marker date="1537323840347" expanded="true" signature="5042:5243" placeholder="select SUM(a..ar_detail..." />
-                <marker date="1537323840347" expanded="true" signature="5360:5390" placeholder="SELECT * fro..system_parameter..." />
-                <marker date="1537323840347" expanded="true" signature="5513:5602" placeholder="SELECT * FRO..ar_header..." />
-                <marker date="1537323840347" expanded="true" signature="5725:5751" placeholder="select * fro..closed_month..." />
-                <marker date="1537323840347" expanded="true" signature="5880:5988" placeholder="update ar_he..." />
-                <marker date="1537323840347" expanded="true" signature="6082:6469" placeholder="SELECT ar_he..ar_header..." />
-                <marker date="1537323840347" expanded="true" signature="6596:6669" placeholder="update ar_he..." />
-                <marker date="1537323840347" expanded="true" signature="6756:6845" placeholder="update gl_he..." />
-                <marker date="1537323840347" expanded="true" signature="6925:6967" placeholder="DELETE FROM ..." />
-                <marker date="1537323840347" expanded="true" signature="7070:7166" placeholder="select * fro..ar_header..." />
-                <marker date="1537323840347" expanded="true" signature="7291:7362" placeholder="update ar_he..." />
-                <marker date="1537323840347" expanded="true" signature="7472:7577" placeholder="update ar_he..." />
-                <marker date="1537323840347" expanded="true" signature="7691:7812" placeholder="update gl_he..." />
-                <marker date="1537323840347" expanded="true" signature="8010:8097" placeholder="update gl_he..." />
-                <marker date="1537323840347" expanded="true" signature="8205:8343" placeholder="INSERT INTO gl_tag..." />
-                <marker date="1537323840347" expanded="true" signature="8242:8343" placeholder="SELECT '${$g..ar_tag..." />
-                <marker date="1537323840347" expanded="true" signature="8479:8693" placeholder="INSERT INTO gl_detail..." />
-                <marker date="1537323840347" expanded="true" signature="8547:8693" placeholder="SELECT '${$g..ar_detail..." />
-                <marker date="1537323840347" expanded="true" signature="8835:8918" placeholder="update gl_de..." />
-                <marker date="1537323840347" expanded="true" signature="9025:9269" placeholder="SELECT ar_he..ar_header..." />
-                <marker date="1537323840347" expanded="true" signature="9410:9789" placeholder="SELECT ar_de..ar_detail..." />
-                <marker date="1537323840347" expanded="true" signature="10021:10377" placeholder="update ar_he..." />
-                <marker date="1537323840347" expanded="true" signature="10511:10683" placeholder="update gl_he..." />
-                <marker date="1537323840347" expanded="true" signature="10784:10846" placeholder="delete from ..." />
-                <marker date="1537323840347" expanded="true" signature="10946:11025" placeholder="delete from ..." />
-                <marker date="1537323840347" expanded="true" signature="11125:11233" placeholder="SELECT f_ter..ar_header..." />
-                <marker date="1537323840347" expanded="true" signature="11353:11432" placeholder="update ar_he..." />
-                <marker date="1537323840347" expanded="true" signature="11524:11619" placeholder="update gl_he..." />
-                <marker date="1537323840347" expanded="true" signature="11698:11789" placeholder="update ar_he..." />
-                <marker date="1537323840347" expanded="true" signature="11873:11963" placeholder="update ar_he..." />
-                <marker date="1537323840347" expanded="true" signature="12042:12092" placeholder="delete from ..." />
-                <marker date="1537323840347" expanded="true" signature="12171:12220" placeholder="delete from ..." />
-                <marker date="1537323840347" expanded="true" signature="12304:12351" placeholder="SELECT * FRO..ar_header..." />
-                <marker date="1537323840347" expanded="true" signature="12459:12528" placeholder="update ar_he..." />
-                <marker date="1537323840347" expanded="true" signature="12614:12694" placeholder="UPDATE ar_he..." />
-                <marker date="1537323840347" expanded="true" signature="12902:13178" placeholder="SELECT MAX( ..gl_header..." />
-                <marker date="1537323840347" expanded="true" signature="13810:14295" placeholder="INSERT INTO gl_header..." />
-                <marker date="1537323840347" expanded="true" signature="13945:14295" placeholder="SELECT '${$p..ar_header..." />
-                <marker date="1537323840347" expanded="true" signature="14350:14580" placeholder="INSERT INTO gl_detail..." />
-                <marker date="1537323840347" expanded="true" signature="14419:14580" placeholder="SELECT '${$p..ar_detail..." />
-                <marker date="1537323840347" expanded="true" signature="14635:14779" placeholder="UPDATE ar_he..." />
-                <marker date="1537323840347" expanded="true" signature="14977:15062" placeholder="UPDATE ar_he..." />
-                <marker date="1537323840347" expanded="true" signature="15107:15208" placeholder="UPDATE gl_he..." />
-                <marker date="1537323840347" expanded="true" signature="15312:15367" placeholder="DELETE FROM ..." />
+                <marker date="1537323828731" expanded="true" signature="118:192" placeholder="SELECT finan..system_parameter..." />
+                <marker date="1537323828731" expanded="true" signature="220:303" placeholder="SELECT RIGHT..." />
+                <marker date="1537323828731" expanded="true" signature="505:653" placeholder="SELECT LEFT ..." />
+                <marker date="1537323828731" expanded="true" signature="762:911" placeholder="SELECT RIGHT..." />
+                <marker date="1537323828731" expanded="true" signature="1247:1614" placeholder="SELECT aph.*..ap_header..." />
+                <marker date="1537323828731" expanded="true" signature="1733:1954" placeholder="SELECT ap_he..ap_header..." />
+                <marker date="1537323828731" expanded="true" signature="2061:2248" placeholder="SELECT ap_de..ap_detail..." />
+                <marker date="1537323828731" expanded="true" signature="2360:2556" placeholder="select SUM(a..ap_detail..." />
+                <marker date="1537323828731" expanded="true" signature="2650:2680" placeholder="SELECT * fro..system_parameter..." />
+                <marker date="1537323828731" expanded="true" signature="2781:3084" placeholder="SELECT ap_he..ap_header..." />
+                <marker date="1537323828731" expanded="true" signature="3200:3300" placeholder="update ap_he..." />
+                <marker date="1537323828731" expanded="true" signature="3472:3673" placeholder="INSERT INTO gl_detail..." />
+                <marker date="1537323828731" expanded="true" signature="3540:3673" placeholder="SELECT '${$g..ap_detail..." />
+                <marker date="1537323828731" expanded="true" signature="3768:4154" placeholder="SELECT ap_he..ap_header..." />
+                <marker date="1537323828731" expanded="true" signature="4259:4328" placeholder="update ap_he..." />
+                <marker date="1537323828731" expanded="true" signature="4406:4491" placeholder="update gl_he..." />
+                <marker date="1537323828731" expanded="true" signature="4569:4636" placeholder="update ap_he..." />
+                <marker date="1537323828731" expanded="true" signature="4717:4800" placeholder="update gl_he..." />
+                <marker date="1537323828731" expanded="true" signature="4894:4991" placeholder="update ap_he..." />
+                <marker date="1537323828731" expanded="true" signature="5085:5194" placeholder="update gl_he..." />
+                <marker date="1537323828731" expanded="true" signature="5292:5370" placeholder="update gl_de..." />
+                <marker date="1537323828731" expanded="true" signature="5459:5703" placeholder="SELECT ap_he..ap_header..." />
+                <marker date="1537323828731" expanded="true" signature="5814:6077" placeholder="SELECT ap_de..ap_detail..." />
+                <marker date="1537323828731" expanded="true" signature="6282:6585" placeholder="update ap_he..." />
+                <marker date="1537323828731" expanded="true" signature="6669:6727" placeholder="delete from ..." />
+                <marker date="1537323828731" expanded="true" signature="6843:6999" placeholder="update gl_he..." />
+                <marker date="1537323828731" expanded="true" signature="7082:7157" placeholder="delete from ..." />
+                <marker date="1537323828731" expanded="true" signature="7240:7344" placeholder="SELECT f_ter..ap_header..." />
+                <marker date="1537323828731" expanded="true" signature="7440:7511" placeholder="update ap_he..." />
+                <marker date="1537323828731" expanded="true" signature="7585:7672" placeholder="update gl_he..." />
+                <marker date="1537323828731" expanded="true" signature="7750:7804" placeholder="select * fro..gl_header..." />
+                <marker date="1537323828731" expanded="true" signature="7907:7961" placeholder="select * fro..gl_detail..." />
+                <marker date="1537323828731" expanded="true" signature="8049:8136" placeholder="update ap_he..." />
+                <marker date="1537323828731" expanded="true" signature="8202:8288" placeholder="update ap_he..." />
+                <marker date="1537323828731" expanded="true" signature="8349:8395" placeholder="delete from ..." />
+                <marker date="1537323828731" expanded="true" signature="8456:8501" placeholder="delete from ..." />
+                <marker date="1537323828731" expanded="true" signature="8567:8614" placeholder="SELECT * FRO..ap_header..." />
+                <marker date="1537323828731" expanded="true" signature="8698:8763" placeholder="update ap_he..." />
+                <marker date="1537323828731" expanded="true" signature="8832:8904" placeholder="UPDATE ap_he..." />
+                <marker date="1537323828731" expanded="true" signature="9078:9343" placeholder="SELECT MAX( ..gl_header..." />
+                <marker date="1537323828731" expanded="true" signature="9799:10239" placeholder="INSERT INTO gl_header..." />
+                <marker date="1537323828731" expanded="true" signature="9934:10239" placeholder="SELECT '${$p..ap_header..." />
+                <marker date="1537323828731" expanded="true" signature="10285:10506" placeholder="INSERT INTO gl_detail..." />
+                <marker date="1537323828731" expanded="true" signature="10354:10506" placeholder="SELECT '${$p..ap_detail..." />
+                <marker date="1537323828731" expanded="true" signature="10552:10687" placeholder="UPDATE ap_he..." />
+                <marker date="1537323828731" expanded="true" signature="10846:10927" placeholder="UPDATE ap_he..." />
+                <marker date="1537323828731" expanded="true" signature="10964:11061" placeholder="UPDATE gl_he..." />
+                <marker date="1537323828731" expanded="true" signature="11134:11168" placeholder="SELECT * FRO..tag..." />
+                <marker date="1537323828731" expanded="true" signature="11284:11374" placeholder="SELECT GROUP..ap_tag..." />
+                <marker date="1537323828731" expanded="true" signature="11486:11541" placeholder="DELETE FROM ..." />
+                <marker date="1537323828731" expanded="true" signature="11645:11783" placeholder="INSERT INTO gl_tag..." />
+                <marker date="1537323828731" expanded="true" signature="11682:11783" placeholder="SELECT '${$g..ap_tag..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="view_ar.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/application/views/ar/view_ar.php">
+      <file leaf-file-name="view_ap.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/application/views/ap/view_ap.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.096774">
-              <caret line="17" column="45" selection-start-line="0" selection-start-column="0" selection-end-line="491" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.7096774">
+              <caret line="60" column="103" selection-start-line="0" selection-start-column="0" selection-end-line="466" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -196,12 +192,12 @@
         <option value="$PROJECT_DIR$/application/views/jv/view_jv.php" />
         <option value="$PROJECT_DIR$/application/models/jv/M_jv.php" />
         <option value="$PROJECT_DIR$/application/models/ap/M_ap.php" />
-        <option value="$PROJECT_DIR$/application/controllers/ap/Ap.php" />
-        <option value="$PROJECT_DIR$/application/controllers/ar/Ar.php" />
         <option value="$PROJECT_DIR$/application/controllers/jv/Jv.php" />
         <option value="$PROJECT_DIR$/application/views/template/header.php" />
         <option value="$PROJECT_DIR$/application/views/template/footer.php" />
         <option value="$PROJECT_DIR$/application/models/ar/M_ar.php" />
+        <option value="$PROJECT_DIR$/application/controllers/ar/Ar.php" />
+        <option value="$PROJECT_DIR$/application/controllers/ap/Ap.php" />
       </list>
     </option>
   </component>
@@ -442,29 +438,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="template" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="glpba" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="glpba" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ar" />
+              <option name="myItemId" value="ap" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -552,7 +526,7 @@
     <option name="totallyTimeSpent" value="2967000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1060" extended-state="7" />
+    <frame x="-9" y="-9" width="1938" height="1060" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.49622437" order="0" side_tool="false" content_ui="combo" />
@@ -791,13 +765,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/ap/view_ap.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="103" selection-start-line="60" selection-start-column="103" selection-end-line="60" selection-end-column="103" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/master/view_coa.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -914,14 +881,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/ar/ar_list.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4078795">
-          <caret line="16" column="18" selection-start-line="0" selection-start-column="0" selection-end-line="381" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/views/ar/ar_print.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.49253732">
@@ -938,110 +897,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/ar/edit_ar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7705678">
-          <caret line="517" column="7" selection-start-line="517" selection-start-column="7" selection-end-line="517" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/config/config.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6373117">
           <caret line="25" column="46" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="46" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/models/ap/M_ap.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.1044774">
-          <caret line="74" column="28" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="28" />
-          <folding>
-            <marker date="1537323828731" expanded="true" signature="118:192" placeholder="SELECT finan..system_parameter..." />
-            <marker date="1537323828731" expanded="true" signature="220:303" placeholder="SELECT RIGHT..." />
-            <marker date="1537323828731" expanded="true" signature="505:653" placeholder="SELECT LEFT ..." />
-            <marker date="1537323828731" expanded="true" signature="762:911" placeholder="SELECT RIGHT..." />
-            <marker date="1537323828731" expanded="true" signature="1247:1614" placeholder="SELECT aph.*..ap_header..." />
-            <marker date="1537323828731" expanded="true" signature="1733:1954" placeholder="SELECT ap_he..ap_header..." />
-            <marker date="1537323828731" expanded="true" signature="2061:2248" placeholder="SELECT ap_de..ap_detail..." />
-            <marker date="1537323828731" expanded="true" signature="2360:2556" placeholder="select SUM(a..ap_detail..." />
-            <marker date="1537323828731" expanded="true" signature="2650:2680" placeholder="SELECT * fro..system_parameter..." />
-            <marker date="1537323828731" expanded="true" signature="2781:3084" placeholder="SELECT ap_he..ap_header..." />
-            <marker date="1537323828731" expanded="true" signature="3200:3300" placeholder="update ap_he..." />
-            <marker date="1537323828731" expanded="true" signature="3472:3673" placeholder="INSERT INTO gl_detail..." />
-            <marker date="1537323828731" expanded="true" signature="3540:3673" placeholder="SELECT '${$g..ap_detail..." />
-            <marker date="1537323828731" expanded="true" signature="3768:4154" placeholder="SELECT ap_he..ap_header..." />
-            <marker date="1537323828731" expanded="true" signature="4259:4328" placeholder="update ap_he..." />
-            <marker date="1537323828731" expanded="true" signature="4406:4491" placeholder="update gl_he..." />
-            <marker date="1537323828731" expanded="true" signature="4569:4636" placeholder="update ap_he..." />
-            <marker date="1537323828731" expanded="true" signature="4717:4800" placeholder="update gl_he..." />
-            <marker date="1537323828731" expanded="true" signature="4894:4991" placeholder="update ap_he..." />
-            <marker date="1537323828731" expanded="true" signature="5085:5194" placeholder="update gl_he..." />
-            <marker date="1537323828731" expanded="true" signature="5292:5370" placeholder="update gl_de..." />
-            <marker date="1537323828731" expanded="true" signature="5459:5703" placeholder="SELECT ap_he..ap_header..." />
-            <marker date="1537323828731" expanded="true" signature="5814:6077" placeholder="SELECT ap_de..ap_detail..." />
-            <marker date="1537323828731" expanded="true" signature="6282:6585" placeholder="update ap_he..." />
-            <marker date="1537323828731" expanded="true" signature="6669:6727" placeholder="delete from ..." />
-            <marker date="1537323828731" expanded="true" signature="6843:6999" placeholder="update gl_he..." />
-            <marker date="1537323828731" expanded="true" signature="7082:7157" placeholder="delete from ..." />
-            <marker date="1537323828731" expanded="true" signature="7240:7344" placeholder="SELECT f_ter..ap_header..." />
-            <marker date="1537323828731" expanded="true" signature="7440:7511" placeholder="update ap_he..." />
-            <marker date="1537323828731" expanded="true" signature="7585:7672" placeholder="update gl_he..." />
-            <marker date="1537323828731" expanded="true" signature="7750:7804" placeholder="select * fro..gl_header..." />
-            <marker date="1537323828731" expanded="true" signature="7907:7961" placeholder="select * fro..gl_detail..." />
-            <marker date="1537323828731" expanded="true" signature="8049:8136" placeholder="update ap_he..." />
-            <marker date="1537323828731" expanded="true" signature="8202:8288" placeholder="update ap_he..." />
-            <marker date="1537323828731" expanded="true" signature="8349:8395" placeholder="delete from ..." />
-            <marker date="1537323828731" expanded="true" signature="8456:8501" placeholder="delete from ..." />
-            <marker date="1537323828731" expanded="true" signature="8567:8614" placeholder="SELECT * FRO..ap_header..." />
-            <marker date="1537323828731" expanded="true" signature="8698:8763" placeholder="update ap_he..." />
-            <marker date="1537323828731" expanded="true" signature="8832:8904" placeholder="UPDATE ap_he..." />
-            <marker date="1537323828731" expanded="true" signature="9078:9343" placeholder="SELECT MAX( ..gl_header..." />
-            <marker date="1537323828731" expanded="true" signature="9799:10239" placeholder="INSERT INTO gl_header..." />
-            <marker date="1537323828731" expanded="true" signature="9934:10239" placeholder="SELECT '${$p..ap_header..." />
-            <marker date="1537323828731" expanded="true" signature="10285:10506" placeholder="INSERT INTO gl_detail..." />
-            <marker date="1537323828731" expanded="true" signature="10354:10506" placeholder="SELECT '${$p..ap_detail..." />
-            <marker date="1537323828731" expanded="true" signature="10552:10687" placeholder="UPDATE ap_he..." />
-            <marker date="1537323828731" expanded="true" signature="10846:10927" placeholder="UPDATE ap_he..." />
-            <marker date="1537323828731" expanded="true" signature="10964:11061" placeholder="UPDATE gl_he..." />
-            <marker date="1537323828731" expanded="true" signature="11134:11168" placeholder="SELECT * FRO..tag..." />
-            <marker date="1537323828731" expanded="true" signature="11284:11374" placeholder="SELECT GROUP..ap_tag..." />
-            <marker date="1537323828731" expanded="true" signature="11486:11541" placeholder="DELETE FROM ..." />
-            <marker date="1537323828731" expanded="true" signature="11645:11783" placeholder="INSERT INTO gl_tag..." />
-            <marker date="1537323828731" expanded="true" signature="11682:11783" placeholder="SELECT '${$g..ap_tag..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/ap/Ap.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.354838">
-          <caret line="45" column="46" selection-start-line="45" selection-start-column="46" selection-end-line="45" selection-end-column="46" />
-          <folding>
-            <marker date="1537344850133" expanded="true" signature="4333:4401" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="4513:5025" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="4556:4683" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="4726:4838" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="4881:5003" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="5059:5250" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="5101:5227" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="5287:5812" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="5330:5451" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="5494:5627" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="5671:5794" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="5853:6425" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="5896:6021" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="6064:6185" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="6228:6349" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="6492:6860" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="6538:6860" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="6985:7368" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="7014:7338" placeholder="..." />
-            <marker date="1537344850133" expanded="true" signature="9240:9515" placeholder="SELECT MAX( ..gl_header..." />
-            <marker date="1537344850133" expanded="true" signature="14531:14742" placeholder="SELECT MAX( ..gl_header..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1092,18 +952,55 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/views/ar/view_ar.php">
+    <entry file="file://$PROJECT_DIR$/application/views/ar/ar_list.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.096774">
-          <caret line="17" column="45" selection-start-line="0" selection-start-column="0" selection-end-line="491" selection-end-column="0" />
+        <state vertical-scroll-proportion="-9.935484">
+          <caret line="14" column="20" selection-start-line="0" selection-start-column="0" selection-end-line="381" selection-end-column="13" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/ar/edit_ar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.32258">
+          <caret line="499" column="74" selection-start-line="499" selection-start-column="65" selection-end-line="499" selection-end-column="74" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/ar/Ar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.7096774">
+          <caret line="617" column="5" selection-start-line="530" selection-start-column="4" selection-end-line="617" selection-end-column="5" />
+          <folding>
+            <marker date="1537352370270" expanded="true" signature="5564:5667" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="5792:6357" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="5839:5978" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="6025:6149" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="6196:6330" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="6399:6619" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="6447:6592" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="6661:7243" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="6708:6842" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="6889:7034" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="7081:7216" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="7285:7928" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="7332:7474" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="7521:7654" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="7701:7834" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="8020:8388" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="8066:8388" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="8520:8880" placeholder="..." />
+            <marker date="1537352370270" expanded="true" signature="9753:10035" placeholder="SELECT MAX( ..gl_header..." />
+            <marker date="1537352370270" expanded="true" signature="15091:15323" placeholder="SELECT MAX( ..gl_header..." />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/application/models/ar/M_ar.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.701492">
-          <caret line="39" column="5" selection-start-line="35" selection-start-column="3" selection-end-line="39" selection-end-column="5" />
+        <state vertical-scroll-proportion="-2.7096775">
+          <caret line="131" column="0" selection-start-line="131" selection-start-column="0" selection-end-line="131" selection-end-column="0" />
           <folding>
             <marker date="1537323840347" expanded="true" signature="108:350" placeholder="SELECT coa.c..coa..." />
             <marker date="1537323840347" expanded="true" signature="465:485" placeholder="SELECT * FRO..bank..." />
@@ -1166,31 +1063,109 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/application/controllers/ar/Ar.php">
+    <entry file="file://$PROJECT_DIR$/application/views/ar/view_ar.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.35912937">
-          <caret line="122" column="34" selection-start-line="57" selection-start-column="8" selection-end-line="122" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.41714948">
+          <caret line="23" column="30" selection-start-line="0" selection-start-column="0" selection-end-line="491" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/models/ap/M_ap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.7096774">
+          <caret line="74" column="28" selection-start-line="74" selection-start-column="18" selection-end-line="74" selection-end-column="28" />
           <folding>
-            <marker date="1537344955367" expanded="true" signature="5640:5743" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="5868:6433" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="5915:6054" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="6101:6225" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="6272:6406" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="6475:6695" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="6523:6668" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="6737:7319" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="6784:6918" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="6965:7110" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="7157:7292" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="7361:8004" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="7408:7550" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="7597:7730" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="7777:7910" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="8096:8464" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="8142:8464" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="8596:8956" placeholder="..." />
-            <marker date="1537344955367" expanded="true" signature="9829:10111" placeholder="SELECT MAX( ..gl_header..." />
-            <marker date="1537344955367" expanded="true" signature="15167:15399" placeholder="SELECT MAX( ..gl_header..." />
+            <marker date="1537323828731" expanded="true" signature="118:192" placeholder="SELECT finan..system_parameter..." />
+            <marker date="1537323828731" expanded="true" signature="220:303" placeholder="SELECT RIGHT..." />
+            <marker date="1537323828731" expanded="true" signature="505:653" placeholder="SELECT LEFT ..." />
+            <marker date="1537323828731" expanded="true" signature="762:911" placeholder="SELECT RIGHT..." />
+            <marker date="1537323828731" expanded="true" signature="1247:1614" placeholder="SELECT aph.*..ap_header..." />
+            <marker date="1537323828731" expanded="true" signature="1733:1954" placeholder="SELECT ap_he..ap_header..." />
+            <marker date="1537323828731" expanded="true" signature="2061:2248" placeholder="SELECT ap_de..ap_detail..." />
+            <marker date="1537323828731" expanded="true" signature="2360:2556" placeholder="select SUM(a..ap_detail..." />
+            <marker date="1537323828731" expanded="true" signature="2650:2680" placeholder="SELECT * fro..system_parameter..." />
+            <marker date="1537323828731" expanded="true" signature="2781:3084" placeholder="SELECT ap_he..ap_header..." />
+            <marker date="1537323828731" expanded="true" signature="3200:3300" placeholder="update ap_he..." />
+            <marker date="1537323828731" expanded="true" signature="3472:3673" placeholder="INSERT INTO gl_detail..." />
+            <marker date="1537323828731" expanded="true" signature="3540:3673" placeholder="SELECT '${$g..ap_detail..." />
+            <marker date="1537323828731" expanded="true" signature="3768:4154" placeholder="SELECT ap_he..ap_header..." />
+            <marker date="1537323828731" expanded="true" signature="4259:4328" placeholder="update ap_he..." />
+            <marker date="1537323828731" expanded="true" signature="4406:4491" placeholder="update gl_he..." />
+            <marker date="1537323828731" expanded="true" signature="4569:4636" placeholder="update ap_he..." />
+            <marker date="1537323828731" expanded="true" signature="4717:4800" placeholder="update gl_he..." />
+            <marker date="1537323828731" expanded="true" signature="4894:4991" placeholder="update ap_he..." />
+            <marker date="1537323828731" expanded="true" signature="5085:5194" placeholder="update gl_he..." />
+            <marker date="1537323828731" expanded="true" signature="5292:5370" placeholder="update gl_de..." />
+            <marker date="1537323828731" expanded="true" signature="5459:5703" placeholder="SELECT ap_he..ap_header..." />
+            <marker date="1537323828731" expanded="true" signature="5814:6077" placeholder="SELECT ap_de..ap_detail..." />
+            <marker date="1537323828731" expanded="true" signature="6282:6585" placeholder="update ap_he..." />
+            <marker date="1537323828731" expanded="true" signature="6669:6727" placeholder="delete from ..." />
+            <marker date="1537323828731" expanded="true" signature="6843:6999" placeholder="update gl_he..." />
+            <marker date="1537323828731" expanded="true" signature="7082:7157" placeholder="delete from ..." />
+            <marker date="1537323828731" expanded="true" signature="7240:7344" placeholder="SELECT f_ter..ap_header..." />
+            <marker date="1537323828731" expanded="true" signature="7440:7511" placeholder="update ap_he..." />
+            <marker date="1537323828731" expanded="true" signature="7585:7672" placeholder="update gl_he..." />
+            <marker date="1537323828731" expanded="true" signature="7750:7804" placeholder="select * fro..gl_header..." />
+            <marker date="1537323828731" expanded="true" signature="7907:7961" placeholder="select * fro..gl_detail..." />
+            <marker date="1537323828731" expanded="true" signature="8049:8136" placeholder="update ap_he..." />
+            <marker date="1537323828731" expanded="true" signature="8202:8288" placeholder="update ap_he..." />
+            <marker date="1537323828731" expanded="true" signature="8349:8395" placeholder="delete from ..." />
+            <marker date="1537323828731" expanded="true" signature="8456:8501" placeholder="delete from ..." />
+            <marker date="1537323828731" expanded="true" signature="8567:8614" placeholder="SELECT * FRO..ap_header..." />
+            <marker date="1537323828731" expanded="true" signature="8698:8763" placeholder="update ap_he..." />
+            <marker date="1537323828731" expanded="true" signature="8832:8904" placeholder="UPDATE ap_he..." />
+            <marker date="1537323828731" expanded="true" signature="9078:9343" placeholder="SELECT MAX( ..gl_header..." />
+            <marker date="1537323828731" expanded="true" signature="9799:10239" placeholder="INSERT INTO gl_header..." />
+            <marker date="1537323828731" expanded="true" signature="9934:10239" placeholder="SELECT '${$p..ap_header..." />
+            <marker date="1537323828731" expanded="true" signature="10285:10506" placeholder="INSERT INTO gl_detail..." />
+            <marker date="1537323828731" expanded="true" signature="10354:10506" placeholder="SELECT '${$p..ap_detail..." />
+            <marker date="1537323828731" expanded="true" signature="10552:10687" placeholder="UPDATE ap_he..." />
+            <marker date="1537323828731" expanded="true" signature="10846:10927" placeholder="UPDATE ap_he..." />
+            <marker date="1537323828731" expanded="true" signature="10964:11061" placeholder="UPDATE gl_he..." />
+            <marker date="1537323828731" expanded="true" signature="11134:11168" placeholder="SELECT * FRO..tag..." />
+            <marker date="1537323828731" expanded="true" signature="11284:11374" placeholder="SELECT GROUP..ap_tag..." />
+            <marker date="1537323828731" expanded="true" signature="11486:11541" placeholder="DELETE FROM ..." />
+            <marker date="1537323828731" expanded="true" signature="11645:11783" placeholder="INSERT INTO gl_tag..." />
+            <marker date="1537323828731" expanded="true" signature="11682:11783" placeholder="SELECT '${$g..ap_tag..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/views/ap/view_ap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.7096774">
+          <caret line="60" column="103" selection-start-line="0" selection-start-column="0" selection-end-line="466" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/application/controllers/ap/Ap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25272068">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding>
+            <marker date="1537353266607" expanded="true" signature="4296:4364" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="4476:4988" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="4519:4646" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="4689:4801" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="4844:4966" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="5022:5213" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="5064:5190" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="5250:5775" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="5293:5414" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="5457:5590" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="5634:5757" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="5816:6388" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="5859:5984" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="6027:6148" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="6191:6312" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="6455:6823" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="6501:6823" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="6948:7331" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="6977:7301" placeholder="..." />
+            <marker date="1537353266607" expanded="true" signature="9203:9478" placeholder="SELECT MAX( ..gl_header..." />
+            <marker date="1537353266607" expanded="true" signature="14494:14705" placeholder="SELECT MAX( ..gl_header..." />
           </folding>
         </state>
       </provider>

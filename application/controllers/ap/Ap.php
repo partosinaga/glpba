@@ -60,15 +60,16 @@ class ap extends CI_Controller
 //        INSERT TAG
             $data_tag = array();
             $tag_id = $this->input->post('tag');
-            if(isset($tag_id) ){
-                for ($i = 0; $i < count($tag_id); $i++) {
-                    $data_tag[$i] = array(
-                        'no_voucher' => $data['no_voucher'],
-                        'tag_id' => $tag_id[$i],
-                    );
-                }
-                $this->db->insert_batch('ap_tag', $data_tag);
+            if( iss ){
+
             }
+            for ($i = 0; $i < count($tag_id); $i++) {
+                $data_tag[$i] = array(
+                    'no_voucher' => $data['no_voucher'],
+                    'tag_id' => $tag_id[$i],
+                );
+            }
+            $this->db->insert_batch('ap_tag', $data_tag);
 //        END OF INSERT TAG
 
             //input to ap_detail
