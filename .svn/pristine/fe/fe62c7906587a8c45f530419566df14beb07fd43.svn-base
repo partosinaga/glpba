@@ -1,0 +1,28 @@
+<?php
+class M_bank_book extends CI_Model{
+
+	public function view_bb($period, $account_code){
+		$data = $this->db->query("select gl_header.gl_date, gl_header.gl_no, gl_header.reff_no, gl_header.description, gl_header.total, gl_header.Fmodule, gl_detail.coa_id, coa.name_coa, gl_detail.debit, gl_detail.credit
+			
+			from gl_detail
+			join coa
+			on coa.coa_id = gl_detail.coa_id
+			join gl_header 
+			on gl_header.gl_no = gl_detail.gl_no
+			join bank
+			on bank.account_code = coa.coa_id
+			where bank.account_code = '".$account_code."' AND gl_header.gl_date <= '".$period."'
+			order by gl_header.gl_date ASC;");
+		return $data->result();
+	}
+
+	public function get_bank_name($account_code){
+		$data = $this->db->query("select * from bank where account_code = '".$account_code."'");
+		return $data->row();
+	}
+	
+
+	
+
+}
+?>

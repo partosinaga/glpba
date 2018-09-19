@@ -1,0 +1,30 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+class balance_sheet extends CI_Controller{
+	function __Construct(){
+	parent ::__construct();
+	//$this->load->model('ap/M_ap');
+	$this->load->model('balance_sheet/M_balance_sheet');
+
+		$this->load->helper('url');
+	}
+
+	public function balance_sheet_form(){
+		$data['page'] = 'balance_sheet/balance_sheet_form';
+		$this->load->view('template/template', $data);
+	}
+
+	public function view_bs(){
+		$data['page'] = 'balance_sheet/view_bs';
+		$date_from = $this->input->post('date_from');
+		$date_to = $this->input->post('date_to');
+
+		$data['bsheet'] = $this->M_balance_sheet->get_trans($date_from, $date_to); //get each row
+		$data['prevsaldo'] = $this->M_balance_sheet->get_saldo($date_from); // get saldo befor to sum with each row
+		$data['prev'] = $this->M_balance_sheet->get_prev($date_from, $date_to);// previous month
+		
+		$data['date_from'] = $date_from;
+		$data['date_to'] = $date_to;
+		$this->load->view('balance_sheet/view_bs', $data);
+	}
+}

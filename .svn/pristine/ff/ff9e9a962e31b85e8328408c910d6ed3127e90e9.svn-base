@@ -1,0 +1,113 @@
+<div class="content-wrapper">
+
+  <div class="container">
+      <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Q<small>uery</small> J<small>ournal</small>
+      </h1>
+    </section>
+    <section class="content">
+      <div class="box box-success">
+        <div class="box-header with-border">
+           <h3 class="box-title">Query Journal</h3>
+        </div>
+        <div class="box-body">
+          <div class="page-content-inner">
+              <table id="example" class="table table-striped table-bordered" cellspacing="0">
+                <thead bgcolor="#F4D03F">
+                  <tr>
+                    <th width="30px" class="">NO</th>
+                    <th width="20px" class="">MODULE</th>
+                    <th width="90px">GL NUMBER</th>
+                    <th width="90px">REFRENCES NO.</th>
+                    <th width="50px">DATE</th>
+                    <th>DESCRIPTION</th>
+                    <th width="150px">TOTAL</th>
+                    <th width="50px" >ACTION</th>
+                  </tr>   
+                </thead>
+                <tbody >
+
+                        <?php 
+                          $no=1;
+                          foreach ($getGl as $gg) {
+                        
+                        ?>                        
+                  <tr>
+                    <td class=""><?php echo $no++ ?></td>
+                    <?php
+                      if ($gg->Fmodule == "ar") {
+                        $label = "label label-success";
+                      } elseif ($gg->Fmodule == "ap") {
+                        $label = "label label-danger";
+                      } else{
+                        $label = "label label-primary";
+                        
+                      };
+                      
+                    ?>
+                    <td align="center"><span class="<?php echo $label ?>"><?php echo strtoupper($gg->Fmodule) ?></span></td>
+                    <td><?php echo $gg->gl_no ?></td>
+                    <td><?php echo $gg->reff_no ?></td>
+                    <td><?php echo $gg->gl_date ?></td>
+                    <td><?php echo $gg->description ?></td>
+                    <td align="right"><?php echo number_format($gg->total) ?></td>
+                        
+                    <td>    
+                      
+                      <button type="button" name="view" value="view" id="<?php echo $gg->gl_no ?>"  class=" btn yellow-saffron yellow-gold-stripe pull-right btn-xs view_data"><i class="fa fa-search-plus"></i> Detail</button>     
+                    </td>
+                  </tr>
+                       <?php } ?><!--END OF PHP TAG IN TABLE TOP-->
+
+
+                </tbody>        
+              </table>
+          </div>
+        </div>
+      </div>
+    </section><br><br><br><br><br><br><br><br><br><br><br>
+  </div>
+</div>
+
+<!--modals-->
+    <div width="1000px"  id="dataModal" class="modal container fade" tabindex="-1" data-backdrop="static" data-keyboard="false">
+      <div class="modal-header">
+        <h4 align="center"><i class="fa fa-search-plus"></i> TRANSACTION DETAIL</h4>  
+      </div>
+
+      <div class="modal-body" id="transaction_detail" >
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn red blue-hoki-stripe"><i class="fa fa-remove"></i> Cancel</button>
+      </div>
+    </div>
+<!--modals-->
+
+<script type="text/javascript">
+
+   $(document).ready(function(){
+    $('.view_data').click(function(){
+      var transaction_detail = $(this).attr("id");
+
+      $.ajax({
+        url:"<?php echo base_url('index.php/query_journal/query_journal/detail_gl');?>",
+        method:"post", 
+        data:{transaction_detail:transaction_detail},
+        success:function(data){
+          $('#transaction_detail').html(data);
+          $('#dataModal').modal("show");
+
+        }
+      });
+
+    });
+ });
+
+   $(document).ready(function() {
+    $('#example').DataTable();
+
+} );
+</script>

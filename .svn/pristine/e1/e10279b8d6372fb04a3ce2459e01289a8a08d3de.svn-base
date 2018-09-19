@@ -1,0 +1,434 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+class jv extends CI_Controller{
+	function __Construct(){
+	parent ::__construct();
+	//$this->load->model('ap/M_ap');
+	$this->load->model('ar/M_ar');
+	$this->load->model('jv/M_jv');
+
+		$this->load->helper('url');
+		
+	}
+
+	public function view_jv(){
+		$data['page']='jv/view_jv';
+		
+		$data['bank']= $this->db->get('bank');
+		//get form  table currency
+		$data['curr']= $this->db->get('currency');
+		//get  table coa
+		$data['coa1']= $this->db->get('coa');
+		//get  table coa
+		$data['coa']= $this->M_ar->get_coa('coa');
+		//get kode otomatis
+		$data['kode'] = $this->M_jv->get_kode();
+
+		$this->load->view('template/template', $data);
+	}
+
+	public function input_jv(){
+			 $data['no_voucher'] = $_POST['no_voucher'];
+			 $data['date'] = $_POST['date'];
+	         $data['bank_id'] = $_POST['bank_id'];
+	         $data['description'] = $_POST['description'];
+	         $data['curr_id'] = $_POST['curr_id'];
+	         $data['total'] = $_POST['total'];
+	         $data['kurs'] = $_POST['kurs'];
+	         $data['receive_from'] = $_POST['receive_from'];
+	         $data['no_cek'] = $_POST['no_cek'];
+	         $data['gl_date'] = $_POST['gl_date'];
+	         $data['status'] = $_POST['status'];
+	         $data['audit_user'] =$this->session->userdata('username');
+	         $data['audit_date'] = date("Y-m-d H:i:sa");
+
+	         $this->db->insert('jv_header', $data);
+	         
+	        $no_vouc = $this->input->post('no_vouc');
+	        $coa_id = $this->input->post('coa_id');
+			$debit = $this->input->post('debit');
+			$credit = $this->input->post('credit');
+
+			$datax =array();
+			for($i=0; $i<count($coa_id); $i++) {
+			$datax[$i] = array(
+	           'coa_id' => $coa_id[$i],
+	           'no_voucher' => $no_vouc[$i],
+	           'debit' => $debit[$i],
+	           'credit' => $credit[$i],
+
+	           );
+			}
+			//print_r($datax);
+			//exit;
+			$this->db->insert_batch('jv_detail', $datax);
+			
+			$this->session->set_flashdata('success', 'Journal voucher saved!');
+			redirect('jv/jv/view_jv');
+	}
+
+		public function jv_list(){
+			$data['page'] = 'jv/jv_list';
+			$data['jvList'] = $this->M_jv->get_jv();
+			$this->load->view('template/template', $data);
+		}
+
+		public function detail_jv(){
+			if (isset($_POST["transaction_detail"])) 
+			{
+				$output = '';
+				$connect = mysqli_connect("localhost", "root", "", "gl");
+				$query =  "SELECT * from jv_header WHERE no_voucher =  '".$_POST["transaction_detail"]."' ";
+				$result = mysqli_query($connect, $query);
+
+				$query2 =  "SELECT jv_detail.coa_id, coa.name_coa, jv_detail.debit, jv_detail.credit
+							from jv_detail 
+							join coa
+							on jv_detail.coa_id = coa.coa_id
+							where jv_detail.no_voucher= '".$_POST["transaction_detail"]."' ";
+				$result2 = mysqli_query($connect, $query2);
+				
+
+				$output .= '
+				<div class="">
+					<table class="table table-striped table-bordered table-hover dataTable table-po-detail">';
+
+				while($row = mysqli_fetch_array($result)) {
+					$output .= '
+					 <div class="row">
+
+					  <div class="col-md-3">
+					
+							<label>VOUCHER NO.</label><br>
+							'.$row["no_voucher"].'
+						
+					  </div>
+
+					  <div class="col-md-3">
+						
+							<label>DATE</label><br>
+						'.$row["date"].'
+						
+					  </div>
+
+					  <div class="col-md-3">
+						
+							<label>BANK CODE</label><br>
+							'.$row["bank_id"].'
+						
+					  </div>
+
+					 </div><br>
+
+					 <div class="row">
+                		<div class="col-md-12">
+                  			<label>Desription</label><br>
+                      		'.$row["description"].'            
+                		</div>
+              		 </div><br>
+
+
+
+              		 <div class="row">
+
+					  <div class="col-md-3">
+					
+							<label>CURRENCY</label><br>
+							'.$row["curr_id"].'
+						
+					  </div>
+
+					  <div class="col-md-3">
+						
+							<label>TOTAL</label><br>
+						'.number_format($row["total"]).'
+						
+					  </div>
+
+					  <div class="col-md-3">
+						
+							<label>EXCHANGE RATE</label><br>
+							'.$row["kurs"].'
+						
+					  </div>
+
+					 </div><br>
+
+
+
+					 <div class="row">
+
+					  <div class="col-md-3">
+					
+							<label>Paid To</label><br>
+							'.$row["receive_from"].'
+						
+					  </div>
+
+					  <div class="col-md-3">
+						
+							<label>NO.CEL/GIRO</label><br>
+						'.$row["no_cek"].'
+						
+					  </div>
+
+					  <div class="col-md-3">
+						
+							<label>GL. DATE</label><br>
+							'.$row["gl_date"].'
+						
+					  </div>
+
+					 </div><br>
+					 <table class="table">
+					 <tr bgcolor="#578EBE">
+					 	<td width="200px" align="center"><b>ACCOUNT</td>
+					 	<td align="center"><b>DESCRIPTION</td>
+					 	<td width="200px" align="center"><b>DEBIT</td>
+					 	<td width="200px" align="center"><b>CREDIT</td>
+					 </tr>
+					';
+
+
+				};
+
+
+				while($row2 = mysqli_fetch_array($result2)) {
+					$output .= '
+					 <div class="row">
+					 
+					  <tr>
+					 	<td>'.$row2["coa_id"].'</td>
+					 	<td>'.$row2["name_coa"].'</td>
+					 	<td align="right">'. number_format($row2['debit']).'</td>
+					 	<td align="right">'. number_format($row2['credit']).'</td>
+					 </tr>
+					 </div>
+					';
+
+				
+				};
+
+
+				$output .= "</table></div>";
+				echo $output;
+
+			};
+		}
+
+		public function print_jv(){
+			$no_voucher=$this->input->get('id');
+			//get headet
+			$data['header'] = $this->M_jv->get_header($no_voucher);
+			//get detail
+			$data['detail'] = $this->M_jv->get_detail($no_voucher);
+			$data['totalDetail'] = $this->M_jv->get_totalDetail($no_voucher);
+			//get sytem parameter
+			$data['syspar'] = $this->M_ar->get_syspar();
+			$this->load->view('jv/jv_print', $data);
+		}
+
+		public function posting(){
+			$data['page'] = 'jv/posting';
+			$data['postlist'] = $this->M_jv->get_postList();
+			$this->load->view('template/template', $data);
+		}
+
+		public function save_posting(){			
+			$noVoc=$this->input->post('noVoc');
+			$posted_no=$this->input->post('posted_no');
+			$gl_date=$this->input->post('gl_date');
+			$audit_user = $this->session->userdata('username');
+			$audit_date = date('Y-m-d H:i:s');
+		
+				$q = $this->db->query("select MAX(RIGHT(posted_no,4)) as kt from jv_header");
+				$kd="";
+				$posted_no="";
+				$tgl= date("my");
+				$kd2 = "6".$tgl;
+				if($q->num_rows()>0){
+					foreach ($q->result() as $k){
+						$tmp = ((int)$k->kt)+1;
+						$kd = sprintf("%04s", $tmp);
+					}
+				}else {
+					$kd = "6".$tgl."0001";
+				}
+				$posted_no = $kd2.$kd;
+				//1. to update status JV
+				$data = $this->M_jv->save_posting($noVoc, $posted_no);
+			
+				$gl_no 			= $posted_no;
+				$gl_date		= $gl_date;
+				$noVoc 			= $this->input->post('noVoc');
+				$description 	= $this->input->post('description');
+				$total 			= $this->input->post('total');
+				$Fmodule		= "jv";
+				$Fmonth 		= date("m");
+				$Fyear 			= date("Y");
+				$status 		= "posted";
+				$audit_user		= $audit_user;
+				$audit_date		= $audit_date;
+
+
+				$data = array(
+					'gl_no' 	=> $gl_no,
+					'gl_date'	=> $gl_date,
+					'reff_no'	=> $noVoc,
+					'description'=>	$description,
+					'total'		=> $total,
+					'Fmodule'	=> $Fmodule,
+					'Fmonth'	=> $Fmonth,
+					'Fyear'		=> $Fyear,
+					'status'	=> $status,
+					'audit_user'=> $audit_user,
+					'audit_date'=> $audit_date
+				);
+
+				$this->M_jv->save_glHead($data, 'gl_header');
+
+				//3. move from ar detail to gl detail
+				$data=$this->M_jv->save_glDetail($noVoc, $gl_no);
+				$this->session->set_flashdata('success', 'POSTED!');
+				redirect('jv/jv/posting');
+		}
+
+		public function unposting(){
+			$data['page'] = 'jv/unposting';
+			$data['unpostlist'] = $this->M_jv->get_unposting();
+			$this->load->view('template/template', $data);
+		}
+
+		public function save_unposting(){
+			$id = $this->input->get('id');
+			$data = $this->M_jv->save_unposting($id);
+			$data = $this->M_jv->updateGLHposted($id);
+			$this->session->set_flashdata('message', array('info', 'fa-check',  'SUCCESS', 'UNPOSTED!'));
+			$this->session->set_flashdata('success', 'UNPOSTED!');
+			redirect('jv/jv/unposting');
+		}
+
+		public function save_reposting(){
+			$id = $this->input->get('id');
+			$data = $this->M_jv->save_reposting($id);
+			$data = $this->M_jv->updateGLHunposted($id);
+			$this->session->set_flashdata('success', 'POSTED and keep journal number!');
+			redirect('jv/jv/posting');
+		}
+		 
+		public function save_upd_reposting(){
+
+			$id = $this->input->get("no_voucher");
+			$postedNo = $this->input->get("postedNo");
+			$q = $this->db->query("select MAX(RIGHT(posted_no,4)) as kt from jv_header");
+				$kd="";
+				$posted_no="";
+				$tgl= date("my");
+				$kd2 = "6".$tgl;
+				if($q->num_rows()>0){
+					foreach ($q->result() as $k){
+						$tmp = ((int)$k->kt)+1;
+						$kd = sprintf("%04s", $tmp);
+					}
+				}else {
+					$kd = "6".$tgl."0001";
+				}
+				$posted_no = $kd2.$kd;
+			//reupdate status in gl header and add posted no
+			$data = $this->M_jv->save_upd_reposting($id, $posted_no);
+			//update GL no in GL header
+			//NB=> posted no on AR header = GL No in GL header 
+			$data = $this->M_jv->save_upd_reposting2($id, $posted_no);
+			//to update status in gl header
+			$data = $this->M_jv->updateGLHunposted($id);
+
+			//to update gl_no in GL detail
+			$dadta = $this->M_jv->updateGlNoGlDetail($posted_no, $postedNo);
+
+			$this->session->set_flashdata('success', 'POSTED and generate new journal number!');
+			redirect('jv/jv/posting');
+		}
+
+	public function edit_jv($no_voucher){
+			$data['page'] = 'jv/edit_jv';
+			
+		
+			//get form  table bank
+			$data['bank']= $this->db->get('bank');
+			//get form  table currency
+			$data['curr']= $this->db->get('currency');
+			//get  table coa
+			//$data['coa1']= $this->db->get('coa');
+			//get  table coa
+			$data['coa']= $this->M_ar->get_coa('coa');
+			$data['editjvh'] = $this->M_jv->get_jvh_edit($no_voucher);
+			
+			$data['editjvd'] = $this->M_jv->get_jvd_edit($no_voucher);
+			$this->load->view('template/template', $data);
+		}
+
+	public function save_edit(){
+			$no_voucher = $this->input->post('no_voucher');
+			$bank_id = $this->input->post('bank_id');
+			$description = $this->input->post('description');
+			$curr_id = $this->input->post('curr_id');
+			$total = $this->input->post('total');
+			$kurs = $this->input->post('kurs');
+			$receive_from = $this->input->post('receive_from');
+			$no_cek = $this->input->post('no_cek');
+			$gl_date = $this->input->post('gl_date');
+			
+			$data = array (
+				'no_voucher'=> $no_voucher,
+				'bank_id'=> $bank_id,
+				'description'=> $description,
+				'curr_id'=> $curr_id,
+				'total'=> $total,
+				'kurs'=> $kurs,
+				'receive_from'=> $receive_from,
+				'no_cek'=> $no_cek,
+				'gl_date'=> $gl_date,
+			);
+			$this->M_jv->save_update_jvh($bank_id, $description, $curr_id, $total, $kurs, $receive_from, $no_cek, $gl_date,$no_voucher);
+			$this->M_jv->save_update_glh($total, $description, $gl_date, $no_voucher);
+			
+			$no_voucher = $this->input->post('no_voucher');
+			$posted_no = $this->input->post('posted_no');
+	
+	        $coa_id = $this->input->post('coa_id');
+			$debit = $this->input->post('debit');
+			$credit = $this->input->post('credit');
+
+			$datax2 =array();
+			for($a=0; $a<count($coa_id); $a++) {
+			$datax2[$a] = array(
+	           'coa_id' => $coa_id[$a],
+	           'no_voucher' => $no_voucher,
+	           'debit' => $debit[$a],
+	           'credit' => $credit[$a],
+
+	           );
+			}
+			
+			$datax3 =array();
+			for($a=0; $a<count($coa_id); $a++) {
+			$datax3[$a] = array(
+	           'gl_no' => $posted_no,
+	           'coa_id' => $coa_id[$a],
+	           'reff_no' => $no_voucher,
+	           'debit' => $debit[$a],
+	           'credit' => $credit[$a],
+
+	           );
+			}
+			$this->M_jv->delete_jvd_old($no_voucher);
+			$this->M_jv->delete_gld_old($no_voucher);
+			
+			$this->db->insert_batch('jv_detail', $datax2);
+			$this->db->insert_batch('gl_detail', $datax3);
+			$this->session->set_flashdata('success', 'Update success!');
+			redirect('jv/jv/jv_list');
+
+		}
+}
+	

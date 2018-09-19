@@ -1,0 +1,45 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+class profit_loss extends CI_Controller{
+	function __Construct(){
+	parent ::__construct();
+	
+	$this->load->model('profit_loss/M_profit_loss');
+
+		$this->load->helper('url');
+	}
+
+	public function profit_loss_form(){
+		$data['page'] = 'profit_loss/profit_loss_form';
+		$this->load->view('template/template', $data);
+	}
+
+	public function view_pl(){
+		$date_from = $this->input->post('date_from');
+		$date_to = $this->input->post('date_to');
+
+
+		$data['income'] = $this->M_profit_loss->get_income($date_from, $date_to);
+		$data['cogs'] = $this->M_profit_loss->get_cogs($date_from, $date_to);
+		$data['expense'] = $this->M_profit_loss->get_expense($date_from, $date_to);
+
+		$data['sumIncome'] = $this->M_profit_loss->sum_income($date_from, $date_to);
+		$data['sumCogs'] = $this->M_profit_loss->sum_cogs($date_from, $date_to);
+		$data['sumExpense'] = $this->M_profit_loss->sum_expense($date_from, $date_to);
+
+
+
+		$data['prevIncome'] = $this->M_profit_loss->get_prevIncome($date_from);
+		$data['sumPrevIncome'] = $this->M_profit_loss->sum_prevIncome($date_from);
+		$data['prevCogs'] = $this->M_profit_loss->get_prevCogs($date_from);
+		$data['sumPrevCogs'] = $this->M_profit_loss->sum_prevCogs($date_from);
+		$data['prevExpense'] = $this->M_profit_loss->get_prevExpense($date_from);
+		$data['sumPrevExpense'] = $this->M_profit_loss->sum_prevExpense($date_from);
+
+
+		$data['date_from'] = $date_from;
+		$data['date_to'] = $date_to;
+		$this->load->view('profit_loss/view_pl', $data);
+	}
+
+}

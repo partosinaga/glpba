@@ -1,0 +1,48 @@
+<?php
+class M_trial_balance extends CI_Model{
+
+	
+
+	public function get_gl_head($month, $year){
+		$data = $this->db->query("SELECT 
+			gl_header.gl_no,
+			gl_header.reff_no,
+			gl_header.gl_date,
+			gl_header.description,
+			gl_header.total,
+			gl_header.Fmodule,
+			gl_detail.coa_id,
+			gl_detail.debit,
+			gl_detail.credit
+		FROM
+			 gl_header
+		JOIN gl_detail ON gl_detail.gl_no = gl_header.gl_no
+		WHERE
+		MONTH(gl_header.gl_date) = '".$month."' AND YEAR(gl_header.gl_date) = '".$year."' AND status = 'posted'
+		");
+		return $data->result();
+	}
+
+	public function get_gl_detail($period){
+		$data = $this->db->query("select gl_detail.coa_id, gl_detail.debit, gl_detail.credit
+			from gl_detail
+			join gl_header
+			on gl_header.gl_no = gl_detail.gl_no
+			where gl_header.gl_date like '%".$period."' ;");
+		return $data->result();
+	}
+
+	public function total($month, $year){
+		$data = $this->db->query("select SUM(gl_detail.debit) as debit, SUM(gl_detail.credit) as credit
+			from gl_detail
+			join gl_header
+			on gl_header.gl_no = gl_detail.gl_no
+			where MONTH(gl_header.gl_date) = '".$month."' AND year(gl_header.gl_date)= '".$year."' AND status = 'posted';");
+		return $data->result();
+	}
+
+
+
+
+}
+?>

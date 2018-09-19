@@ -1,0 +1,39 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+class close_month extends CI_Controller{
+	function __Construct(){
+	parent ::__construct();
+	//$this->load->model('ap/M_ap');
+	$this->load->model('close_month/M_close_month');
+
+		$this->load->helper('url');
+		
+	}
+
+	public function close_month_form(){
+		$data['page'] = 'close_month/close_month_form';
+		$this->load->view('template/template', $data);
+	}
+
+	public function close_month(){
+		$period = $this->input->post('period');
+		
+		$data1=$this->M_close_month->cek_date_closed($period);
+		// print_r($data);
+		// exit();
+		if (count($data1) > 0) {
+			$data = $this->M_close_month->update_closed_month($period);
+		} else {
+			$data['date_closed'] = $_POST['period'];
+			$data['status'] = "closed";
+			$this->db->insert('closed_month', $data);
+		}
+		
+		
+
+		$data = $this->M_close_month->close_month($period);		
+		$this->session->set_flashdata('success', 'Success close '. $period.'!');
+		redirect('close_month/close_month/close_month_form');
+	} 
+
+}

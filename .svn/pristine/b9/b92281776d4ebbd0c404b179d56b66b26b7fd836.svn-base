@@ -1,0 +1,132 @@
+<?php
+class M_jv extends CI_Model{
+
+	
+
+	public function get_kode(){
+		$q = $this->db->query("select MAX(RIGHT(no_voucher,3)) as kt from jv_header");
+		$kd="";
+		$tgl= date("m/y");
+		if($q->num_rows()>0){
+			foreach ($q->result() as $k){
+				$tmp = ((int)$k->kt)+1;
+				$kd = sprintf("%03s", $tmp);
+			}
+		}else {
+			$kd = $tgl."001";
+		}
+		return $tgl."/".$kd ;
+	}
+	public function get_jv(){
+		$data = $this->db->query("select jv_header.no_voucher, jv_header.date, jv_header.description, jv_header.total, jv_header.status, gl_header.Fclose
+			FROM jv_header
+			LEFT JOIN gl_header
+			on gl_header.reff_no = jv_header.no_voucher 
+			AND jv_header.description = gl_header.description 
+			AND jv_header.total = gl_header.total
+			ORDER BY jv_header.date DESC;");
+		return $data->result();
+	}
+	public function get_header($no_voucher){
+		$data = $this->db->query("select * from jv_header where no_voucher =  '".$no_voucher."' " );
+		return $data->result();
+	}
+
+	public function get_detail($no_voucher){
+		$data = $this->db->query(" SELECT jv_detail.coa_id, coa.name_coa, jv_detail.debit, jv_detail.credit
+			from jv_detail 
+			join coa
+			on jv_detail.coa_id = coa.coa_id
+			where jv_detail.no_voucher= '".$no_voucher."'; " );
+		return $data->result();
+	}
+	public function get_totalDetail($no_voucher){
+		$data = $this->db->query(" select SUM(jv_detail.debit) as total_debit, SUM(jv_detail.credit) as total_credit
+			from jv_detail 
+			join coa
+			on jv_detail.coa_id = coa.coa_id
+			where jv_detail.no_voucher= '".$no_voucher."';" );
+		return $data->result();
+	}
+
+	public function get_postList(){
+		$data = $this->db->query("select * from jv_header where status = 'post' OR status = 'unposted' ");
+		return $data->result();
+	}
+
+	public function save_posting($noVoc,$posted_no){
+		$data = $this->db->query("update jv_header set status = 'posted', posted_no = '".$posted_no."' where no_voucher = '".$noVoc."' ; ");
+	}
+
+	public function save_glHead($data,$table){
+		$this->db->insert($table,$data);
+	}
+
+	public function save_glDetail($noVoc, $gl_no){
+		$result=$this->db->query("INSERT INTO gl_detail(gl_no, coa_id, debit, credit) 
+			SELECT '".$gl_no."', coa_id, debit, credit FROM jv_detail WHERE no_voucher = '".$noVoc."'  ");
+		return $result;
+	}
+
+	public function get_unposting(){
+		$data = $this->db->query("select * from jv_header where status = 'posted' OR status = 'unposted' ; ");
+		return $data->result();
+	}
+
+	public function save_unposting($id){
+		$data = $this->db->query("update jv_header set status = 'unposted' where no_voucher = '".$id."' ; ");
+	}
+
+	public function updateGLHposted($id){
+		$data = $this->db->query("update gl_header set status = 'unposted' where reff_no = '".$id."' AND Fmodule = 'jv'; ");
+	}
+
+	public function save_reposting($id){
+		$data = $this->db->query("update jv_header set status = 'posted' where no_voucher = '".$id."' ; ");
+	}
+
+	public function updateGLHunposted($id){
+		$data = $this->db->query("update gl_header set status = 'posted' where reff_no = '".$id."' AND Fmodule = 'jv'; ");
+	} 
+
+	public function save_upd_reposting($id, $posted_no){
+		$data = $this->db->query("update jv_header set status = 'posted', posted_no = '".$posted_no."' where no_voucher = '".$id."' ; ");
+	}
+	public function save_upd_reposting2($id, $posted_no){
+		$data = $this->db->query("update gl_header set status = 'posted', gl_no = '".$posted_no."' where reff_no = '".$id."' AND Fmodule = 'jv' ; ");
+	}
+	public function updateGlNoGlDetail($posted_no, $postedNo){
+		$data = $this->db->query("update gl_detail set gl_no = '".$posted_no."' where 
+			gl_no = '".$postedNo."' ");
+	}
+	public function get_jvh_edit($no_voucher){
+		$data=$this->db->query("select * from jv_header where no_voucher = '".$no_voucher."' ");
+		return $data->result();
+	}
+	public function get_jvd_edit($no_voucher){
+		$data=$this->db->query("SELECT jv_detail.no_voucher, jv_detail.coa_id, jv_detail.debit, jv_detail.credit, coa.name_coa
+			from jv_detail
+			join coa
+			on coa.coa_id = jv_detail.coa_id
+			 where jv_detail.no_voucher = '".$no_voucher."' ");
+		return $data->result();
+	}
+
+	public function save_update_jvh($bank_id, $description, $curr_id, $total, $kurs, $receive_from, $no_cek, $gl_date, $no_voucher){
+		$data = $this->db->query(" update jv_header set bank_id = '".$bank_id."' , description = '".$description."' , curr_id = '".$curr_id."' , total= '".$total."' , kurs = '".$total."' , receive_from = '".$receive_from."' , no_cek = '".$no_cek."' , gl_date = '".$gl_date."' where no_voucher = '".$no_voucher."' ");
+	}
+
+	public function delete_jvd_old($no_voucher){
+		$data = $this->db->query(" delete from jv_detail where no_voucher = '".$no_voucher."' ");
+	}
+
+	public function save_update_glh($total, $description, $gl_date, $no_voucher){
+		$data = $this->db->query(" update gl_header set gl_date = '".$gl_date."' , description = '".$description."' , total = '".$total."' where reff_no = '".$no_voucher."' AND Fmodule = 'jv' ");
+	}
+
+	public function delete_gld_old($no_voucher){
+		$data = $this->db->query(" delete from gl_detail where reff_no = '".$no_voucher."' 
+			AND gl_no like '6%'  ");
+	}
+}
+?>

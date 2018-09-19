@@ -1,0 +1,316 @@
+<?php
+class M_profit_loss extends CI_Model{
+
+	public function get_income($date_from, $date_to){
+		$data = $this->db->query("
+		SELECT
+			gl_header.gl_date,
+			coa.name_coa,
+			coa.coa_id,
+			SUM(gl_detail.debit) AS balance_debit,
+			SUM(gl_detail.credit) AS balance_credit,
+			(
+				CASE
+				WHEN subgroup.kelompok IN (1, 7, 8) THEN
+					SUM(gl_detail.debit) - SUM(gl_detail.credit)
+				ELSE
+					SUM(gl_detail.credit) - SUM(gl_detail.debit)
+				END
+			) AS income
+		FROM
+			gl_detail
+		JOIN gl_header ON gl_detail.gl_no = gl_header.gl_no
+		JOIN coa ON coa.coa_id = gl_detail.coa_id
+		JOIN subgroup ON subgroup.subgroup_id = coa.subgroup
+		WHERE
+			gl_header.gl_Date >= '".$date_from."'
+		AND gl_header.gl_date <= '".$date_to."'
+		AND subgroup.kelompok = 5
+		GROUP BY
+			gl_detail.coa_id ASC;");
+		return $data->result();
+	}
+	public function get_cogs($date_from, $date_to){
+		$data = $this->db->query("
+			SELECT
+				gl_header.gl_date,
+				coa.name_coa,
+				coa.coa_id,
+				SUM(gl_detail.debit) AS balance_debit,
+				SUM(gl_detail.credit) AS balance_credit,
+				(
+					CASE
+					WHEN subgroup.kelompok IN (1, 6, 7, 8) THEN
+						SUM(gl_detail.debit) - SUM(gl_detail.credit)
+					ELSE
+						SUM(gl_detail.credit) - SUM(gl_detail.debit)
+					END
+				) AS cogs
+			FROM
+				gl_detail
+			JOIN gl_header ON gl_detail.gl_no = gl_header.gl_no
+			JOIN coa ON coa.coa_id = gl_detail.coa_id
+			JOIN subgroup ON subgroup.subgroup_id = coa.subgroup
+			WHERE
+				gl_header.gl_Date >= '".$date_from."'
+			AND gl_header.gl_date <= '".$date_to."'
+			AND subgroup.kelompok = 6
+			GROUP BY
+				gl_detail.coa_id ASC;");
+		return $data->result();
+	}
+	public function get_expense($date_from, $date_to){
+		$data = $this->db->query("
+			SELECT
+				gl_header.gl_date,
+				coa.name_coa,
+				coa.coa_id,
+				SUM(gl_detail.debit) AS balance_debit,
+				SUM(gl_detail.credit) AS balance_credit,
+				(
+					CASE
+					WHEN subgroup.kelompok IN (1, 6, 7, 8) THEN
+						SUM(gl_detail.debit) - SUM(gl_detail.credit)
+					ELSE
+						SUM(gl_detail.credit) - SUM(gl_detail.debit)
+					END
+				) AS expense
+			FROM
+				gl_detail
+			JOIN gl_header ON gl_detail.gl_no = gl_header.gl_no
+			JOIN coa ON coa.coa_id = gl_detail.coa_id
+			JOIN subgroup ON subgroup.subgroup_id = coa.subgroup
+			WHERE
+				gl_header.gl_Date >= '".$date_from."'
+			AND gl_header.gl_date <= '".$date_to."'
+			AND subgroup.kelompok = 7 OR subgroup.kelompok = 8 
+			GROUP BY
+				gl_detail.coa_id ASC;");
+		return $data->result();
+	}
+
+	public function sum_income($date_from, $date_to){
+		$data = $this->db->query("SELECT
+			(
+				CASE
+				WHEN subgroup.kelompok IN (1, 7, 8) THEN
+					SUM(gl_detail.debit) - SUM(gl_detail.credit)
+				ELSE
+					SUM(gl_detail.credit) - SUM(gl_detail.debit)
+				END
+			) AS sum_income
+		FROM
+			gl_detail
+		JOIN gl_header ON gl_detail.gl_no = gl_header.gl_no
+		JOIN coa ON coa.coa_id = gl_detail.coa_id
+		JOIN subgroup ON subgroup.subgroup_id = coa.subgroup
+		WHERE
+			gl_header.gl_Date >= '".$date_from."'
+			AND gl_header.gl_date <= '".$date_to."'
+		AND subgroup.kelompok = 5");
+		return $data->result();
+	}
+
+	public function sum_cogs($date_from, $date_to){
+		$data = $this->db->query("
+			SELECT
+				(
+					CASE
+					WHEN subgroup.kelompok IN (1, 7, 8) THEN
+						SUM(gl_detail.debit) - SUM(gl_detail.credit)
+					ELSE
+						SUM(gl_detail.credit) - SUM(gl_detail.debit)
+					END
+				) AS sum_cogs
+			FROM
+				gl_detail
+			JOIN gl_header ON gl_detail.gl_no = gl_header.gl_no
+			JOIN coa ON coa.coa_id = gl_detail.coa_id
+			JOIN subgroup ON subgroup.subgroup_id = coa.subgroup
+			WHERE
+				gl_header.gl_Date >= '".$date_from."'
+				AND gl_header.gl_date <= '".$date_to."'
+			AND subgroup.kelompok = 6");
+		return $data->result();
+	}
+
+	public function sum_expense($date_from, $date_to){
+		$data = $this->db->query("
+			SELECT
+				(
+					CASE
+					WHEN subgroup.kelompok IN (1, 6, 7, 8) THEN
+						SUM(gl_detail.debit) - SUM(gl_detail.credit)
+					ELSE
+						SUM(gl_detail.credit) - SUM(gl_detail.debit)
+					END
+				) AS sum_expense
+			FROM
+				gl_detail
+			JOIN gl_header ON gl_detail.gl_no = gl_header.gl_no
+			JOIN coa ON coa.coa_id = gl_detail.coa_id
+			JOIN subgroup ON subgroup.subgroup_id = coa.subgroup
+			WHERE
+				gl_header.gl_Date >= '".$date_from."'
+				AND gl_header.gl_date <= '".$date_to."'
+			AND subgroup.kelompok = 7 OR subgroup.kelompok = 8 
+			");
+		return $data->result();
+	}
+
+
+	public function get_previncome($date_from){
+		$data = $this->db->query("
+			SELECT
+				gl_header.gl_date,
+				coa.name_coa,
+				coa.coa_id,
+				SUM(gl_detail.debit) AS balance_debit,
+				SUM(gl_detail.credit) AS balance_credit,
+				CASE
+					WHEN subgroup.kelompok IN (1, 7, 8) THEN
+						SUM(gl_detail.debit) - SUM(gl_detail.credit)
+					ELSE
+						SUM(gl_detail.credit) - SUM(gl_detail.debit)
+					END
+				 AS prev_income
+			FROM
+				gl_detail
+			JOIN gl_header ON gl_detail.gl_no = gl_header.gl_no
+			JOIN coa ON coa.coa_id = gl_detail.coa_id
+			JOIN subgroup ON subgroup.subgroup_id = coa.subgroup
+			WHERE
+				gl_header.gl_date < '".$date_from."'
+			AND subgroup.kelompok = 5
+			GROUP BY
+				gl_detail.coa_id ASC;
+			");
+		return $data->result();
+	}
+
+	public function sum_prevIncome($date_from){
+		$data = $this->db->query("
+			SELECT
+				(
+					CASE
+					WHEN subgroup.kelompok IN (1, 7, 8) THEN
+						SUM(gl_detail.debit) - SUM(gl_detail.credit)
+					ELSE
+						SUM(gl_detail.credit) - SUM(gl_detail.debit)
+					END
+				) AS prev_sum_income
+			FROM
+				gl_detail
+			JOIN gl_header ON gl_detail.gl_no = gl_header.gl_no
+			JOIN coa ON coa.coa_id = gl_detail.coa_id
+			JOIN subgroup ON subgroup.subgroup_id = coa.subgroup
+			WHERE
+				gl_header.gl_date < '".$date_from."'
+			AND subgroup.kelompok = 5
+			");
+		return $data->result();
+	}
+	public function get_prevCogs($date_from){
+		$data = $this->db->query("
+			SELECT
+				gl_header.gl_date,
+				coa.name_coa,
+				coa.coa_id,
+				SUM(gl_detail.debit) AS balance_debit,
+				SUM(gl_detail.credit) AS balance_credit,
+				(
+					CASE
+					WHEN subgroup.kelompok IN (1, 6, 7, 8) THEN
+						SUM(gl_detail.debit) - SUM(gl_detail.credit)
+					ELSE
+						SUM(gl_detail.credit) - SUM(gl_detail.debit)
+					END
+				) AS prev_cogs
+			FROM
+				gl_detail
+			JOIN gl_header ON gl_detail.gl_no = gl_header.gl_no
+			JOIN coa ON coa.coa_id = gl_detail.coa_id
+			JOIN subgroup ON subgroup.subgroup_id = coa.subgroup
+			WHERE
+				gl_header.gl_date < '".$date_from."'
+			AND subgroup.kelompok = 6
+			");
+		return $data->result();
+	}
+	public function sum_prevCogs($date_from){
+		$data = $this->db->query("
+					SELECT
+			(
+				CASE
+				WHEN subgroup.kelompok IN (1, 7, 8) THEN
+					SUM(gl_detail.debit) - SUM(gl_detail.credit)
+				ELSE
+					SUM(gl_detail.credit) - SUM(gl_detail.debit)
+				END
+			) AS prev_sum_cogs
+		FROM
+			gl_detail
+		JOIN gl_header ON gl_detail.gl_no = gl_header.gl_no
+		JOIN coa ON coa.coa_id = gl_detail.coa_id
+		JOIN subgroup ON subgroup.subgroup_id = coa.subgroup
+		WHERE
+			gl_header.gl_date < '".$date_from."'
+		AND subgroup.kelompok = 6
+			");
+		return $data->result();
+	}
+	public function get_prevExpense($date_from){
+		$data = $this->db->query("
+				SELECT
+					gl_header.gl_date,
+					coa.name_coa,
+					coa.coa_id,
+					SUM(gl_detail.debit) AS balance_debit,
+					SUM(gl_detail.credit) AS balance_credit,
+					(
+						CASE
+						WHEN subgroup.kelompok IN (1, 6, 7, 8) THEN
+							SUM(gl_detail.debit) - SUM(gl_detail.credit)
+						ELSE
+							SUM(gl_detail.credit) - SUM(gl_detail.debit)
+						END
+					) AS prev_expense
+				FROM
+					gl_detail
+				JOIN gl_header ON gl_detail.gl_no = gl_header.gl_no
+				JOIN coa ON coa.coa_id = gl_detail.coa_id
+				JOIN subgroup ON subgroup.subgroup_id = coa.subgroup
+					
+				WHERE gl_header.gl_date < '".$date_from."' 
+				AND subgroup.kelompok = 7 OR subgroup.kelompok = 8 
+				GROUP BY
+					gl_detail.coa_id ASC;
+			");
+		return $data->result();
+	}
+
+	public function sum_prevExpense($date_from){
+		$data = $this->db->query("
+					SELECT
+						(
+							CASE
+							WHEN subgroup.kelompok IN (1, 6, 7, 8) THEN
+								SUM(gl_detail.debit) - SUM(gl_detail.credit)
+							ELSE
+								SUM(gl_detail.credit) - SUM(gl_detail.debit)
+							END
+						) AS sum_prev_expense
+					FROM
+						gl_detail
+					JOIN gl_header ON gl_detail.gl_no = gl_header.gl_no
+					JOIN coa ON coa.coa_id = gl_detail.coa_id
+					JOIN subgroup ON subgroup.subgroup_id = coa.subgroup
+					WHERE
+						gl_header.gl_Date < '".$date_from."'
+					AND subgroup.kelompok = 7 OR subgroup.kelompok = 8 
+
+			");
+		return $data->result();
+	}
+}
+?>

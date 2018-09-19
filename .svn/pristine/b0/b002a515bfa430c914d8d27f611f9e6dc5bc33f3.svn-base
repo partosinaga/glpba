@@ -1,0 +1,213 @@
+<?php
+class M_ar extends CI_Model{
+
+	public function get_coa(){
+		$data = $this->db->query("SELECT
+				coa.coa_id, coa.name_coa, subgroup.kelompok, group_coa.name
+			FROM
+				`coa`
+			 join subgroup
+			on subgroup.subgroup_id = coa.subgroup
+			join group_coa
+			on group_coa.group_id = subgroup.kelompok
+			where coa.header = '' AND coa.active = 'active';");
+		return $data->result();
+	}
+
+	public function get_kode(){
+		$q = $this->db->query("select MAX(RIGHT(no_voucher,3)) as kt from ar_header");
+		$kd="";
+		$tgl= date("m/y");
+		if($q->num_rows()>0){
+			foreach ($q->result() as $k){
+				$tmp = ((int)$k->kt)+1;
+				$kd = sprintf("%03s", $tmp);
+			}
+		}else {
+			$kd = $tgl."001";
+		}
+		return $tgl."/".$kd ;
+	}
+
+	
+	public function add_arHeader($data,$table){
+		$this->db->insert($table,$data);
+	}
+
+	public function add_arDetail($data,$table){
+		$this->db->insert($table,$data);
+	}
+	/*
+	public function add_arDetail(){
+		$result = $this->db->query("insert into ar_detail(no_voucher, coa_id, debit, credit) SELECT
+		no_voucher, coa_id, debit, credit from journal_temp ;");
+		return $result;
+	}*/
+
+
+	public function get_ar(){
+		$data=$this->db->query("select ar_header.no_voucher, ar_header.date, ar_header.description, ar_header.total, ar_header.status, gl_header.Fclose
+			FROM ar_header
+			LEFT JOIN gl_header
+			on gl_header.reff_no = ar_header.no_voucher 
+			AND ar_header.description = gl_header.description 
+			AND ar_header.total = gl_header.total
+			ORDER BY ar_header.date DESC;");
+		return $data->result();
+	}
+
+	public function add_ar_journal($no_voucher, $coa_id, $debit, $credit){
+		$data2 = array(
+			'no_voucher' => json_encode($no_voucher),
+			'coa_id' => json_encode($coa_id),
+			'debit' => json_encode($debit),
+			'credit' => json_encode($credit),
+			);
+		$this->db->insert('ar_detail', $data2);
+	}
+
+	public function get_header($no_voucher){
+		$data = $this->db->query("select * from ar_header where no_voucher =  '".$no_voucher."' " );
+		return $data->result();
+	}
+
+	public function get_detail($no_voucher){
+		$data = $this->db->query(" SELECT ar_detail.coa_id, coa.name_coa, ar_detail.debit, ar_detail.credit
+			from ar_detail 
+			join coa
+			on ar_detail.coa_id = coa.coa_id
+			where ar_detail.no_voucher= '".$no_voucher."'; " );
+		return $data->result();
+	}
+	public function get_totalDetail($no_voucher){
+		$data = $this->db->query("select SUM(ar_detail.debit) as total_debit, SUM(ar_detail.credit) as total_credit
+			from ar_detail 
+			join coa
+			on ar_detail.coa_id = coa.coa_id
+			where ar_detail.no_voucher= '".$no_voucher."';" );
+		return $data->result();
+	}
+	public function get_syspar(){
+		$data = $this->db->query("SELECT * from system_parameter " );
+		return $data->result();
+	}
+	
+	public function get_postList(){
+		$data = $this->db->query("SELECT
+				ar_header.no_voucher,
+				ar_header.date,
+				ar_header.description,
+				ar_header.total,
+				ar_header.gl_date,
+				ar_header. status,
+				ar_header.gl_date,
+				ar_header.posted_no,
+				gl_header.gl_no,
+				gl_header.Fclose
+			FROM
+				ar_header
+			LEFT JOIN gl_header ON ar_header.no_voucher = gl_header.reff_no
+			WHERE
+				ar_header.status= 'unposted'  OR ar_header.status = 'post'
+			ORDER BY
+				ar_header.no_voucher DESC");
+		return $data->result();
+	}
+
+	public function get_close_list(){
+		$data = $this->db->query("select * from closed_month;");
+		return $data->result();
+	}
+
+	public function save_posting($noVoc,$posted_no){
+		$data = $this->db->query("update ar_header set status = 'posted', posted_no = '".$posted_no."' where no_voucher = '".$noVoc."' ; ");
+	} 
+
+	public function get_unposting(){
+		$data = $this->db->query("select ar_header.no_voucher, ar_header.date, ar_header.description, ar_header.total, ar_header.gl_date,ar_header.status, gl_header.gl_no
+			from ar_header
+			join gl_header
+			on ar_header.no_voucher = gl_header.reff_no
+			where gl_header.status = 'posted' AND gl_header.Fmodule = 'ar'
+			ORDER BY ar_header.no_voucher DESC ");
+		return $data->result();
+	}
+
+	public function save_unposting($id){
+		$data = $this->db->query("update ar_header set status = 'unposted' where no_voucher = '".$id."' ; ");
+	}
+
+	public function updateGLHposted($id){
+			$data = $this->db->query("update gl_header set status = 'unposted' where reff_no = '".$id."' AND Fmodule = 'ar' ; ");
+	}
+
+	public function countNoVoc($noVoc, $posted_no){
+		$data = $this->db->query("select * from ar_header where no_voucher = '".$noVoc."' and posted_no = '".$posted_no."' ");
+		return $data->result();
+
+	}
+
+	public function save_reposting($id){
+		$data = $this->db->query("update ar_header set status = 'posted' where no_voucher = '".$id."' ; ");
+	}
+
+	public function save_upd_reposting($id, $posted_no){
+		$data = $this->db->query("update ar_header set status = 'posted', posted_no = '".$posted_no."' where no_voucher = '".$id."' ; ; ");
+	}
+
+	public function save_upd_reposting2($id, $posted_no){
+		$data = $this->db->query(" update gl_header set status = 'posted' , gl_no = '".$posted_no."' 
+			where reff_no = '".$id."' AND Fmodule = 'ar' ");
+	}
+
+	public function save_glHead($data,$table){
+		$this->db->insert($table,$data);
+	}
+
+	
+
+	public function updateGLHunposted($id){
+		$data = $this->db->query("update gl_header set status = 'posted' where reff_no = '".$id."' AND Fmodule = 'ar' ; ");
+	} 
+
+	public function save_glDetail($noVoc, $gl_no){
+		$result=$this->db->query("INSERT INTO gl_detail(gl_no, coa_id, debit, credit) 
+			SELECT '".$gl_no."', coa_id, debit, credit FROM ar_detail WHERE no_voucher = '".$noVoc."'  ");
+		return $result;
+	}
+
+	public function updateGlNoGlDetail($posted_no, $postedNo){
+		$data = $this->db->query("update gl_detail set gl_no = '".$posted_no."' where 
+		 gl_no = '".$postedNo."' ");
+	}
+
+	public function get_arh_edit($no_voucher){
+		$data=$this->db->query("select * from ar_header where no_voucher = '".$no_voucher."' ");
+		return $data->result();
+	}
+	public function get_ard_edit($no_voucher){
+		$data=$this->db->query("SELECT ar_detail.no_voucher,ar_detail.id, ar_detail.coa_id, ar_detail.debit, ar_detail.credit, coa.name_coa
+			from ar_detail
+			join coa
+			on coa.coa_id = ar_detail.coa_id
+			 where ar_detail.no_voucher = '".$no_voucher."' ");
+		return $data->result();
+	}
+	public function save_update_arh($bank_id, $description, $curr_id, $total, $kurs, $receive_from, $no_cek, $gl_date, $no_voucher){
+		$data = $this->db->query(" update ar_header set bank_id = '".$bank_id."' , description = '".$description."' , curr_id = '".$curr_id."' , total= '".$total."' , kurs = '".$kurs."' , receive_from = '".$receive_from."' , no_cek = '".$no_cek."' , gl_date = '".$gl_date."' where no_voucher = '".$no_voucher."' ");
+	}
+
+	public function save_update_glh($total, $description, $gl_date, $no_voucher){
+		$data = $this->db->query(" update gl_header set gl_date = '".$gl_date."' , description = '".$description."' , total = '".$total."' where reff_no = '".$no_voucher."' AND Fmodule = 'ar' ");
+	}
+
+	public function delete_ard_old($no_voucher){
+		$data = $this->db->query(" delete from ar_detail where no_voucher = '".$no_voucher."' ");
+	}
+
+	public function delete_gld_old($no_voucher){
+		$data = $this->db->query(" delete from gl_detail where reff_no = '".$no_voucher."' 
+			AND gl_no like '2%'  ");
+	}
+}
+?>

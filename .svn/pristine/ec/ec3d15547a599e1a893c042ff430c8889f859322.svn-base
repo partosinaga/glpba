@@ -1,0 +1,11 @@
+<?php
+class M_user_settings extends CI_Model{
+
+
+
+	public function get_user(){
+		$data = $this->db->query("select * from user");
+		return $data->result();
+	}
+}
+?>

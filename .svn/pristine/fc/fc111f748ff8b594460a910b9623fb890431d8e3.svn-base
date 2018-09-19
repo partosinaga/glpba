@@ -1,0 +1,21 @@
+<?php
+class M_close_month extends CI_Model{
+
+	public function close_month($period){
+		$data = $this->db->query("update gl_header 
+				set Fclose = 'close' 
+				where gl_date like '".$period."%'");
+	}
+	
+	public function cek_date_closed($period){
+		$data = $this->db->query("select * from closed_month where date_closed = '".$period."'");
+		return $data->result();
+	}
+
+	public function update_closed_month($period){
+		$data = $this->db->query("update closed_month 
+				set status = 'close' 
+				where date_closed like '".$period."%'");
+	}
+}
+?>

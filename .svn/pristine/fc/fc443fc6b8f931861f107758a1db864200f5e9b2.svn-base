@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profit & Loss</title>
+  <link href="<?php echo base_url(); ?>resource/balance_sheet.css" rel="stylesheet" type="text/css"/>
+  <link href="<?php echo base_url(); ?>resource/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+  <script src="<?php echo base_url(); ?>resource/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script>
+  function printContent(el){
+      var restorepage = document.body.innerHTML;
+      var printcontent = document.getElementById(el).innerHTML;
+      document.body.innerHTML = printcontent;
+      window.print();
+      document.body.innerHTML = restorepage;
+  }
+</script>
+<?php
+    $sql ="SELECT * FROM system_parameter";
+     $query = $this->db->query($sql);
+      if ($query->num_rows() > 0) {
+        foreach ($query->result() as $row) {?>
+        <b value="<?php echo $row->company_id;?>">
+<?php } } ?>
+</head>
+<a onclick="printContent('div1')" >
+  <button style="background-color: #cc0000" type="button" class="btn btn-block btn-primary btn-flat"><h3>Print</h3></button>
+</a>
+<body>
+  <div id="div1">
+    <div>  
+        <table >
+          <tr>
+            <td class="text-center" style="padding-top: 10px;  font: 20px normal Helvetica, Arial, sans-serif;"><strong><?php echo strtoupper($row->name); ?></strong></td>
+          </tr>
+          <tr>
+            <td class="text-center" style="padding-top: 10px; font: 15px normal Helvetica, Arial, sans-serif;"><strong>PROFIT & LOSS</strong></td>
+          </tr>
+          <tr>
+            <td class="text-center" style="font-size:9pt ">
+              (<?php   
+                
+                echo $date_from.' to '.$date_to;
+              ?>)
+            </td>
+          </tr>
+        </table>
+    </div>
+
+    <div id="body">
+      <?php 
+
+              echo '
+                <tr align="right">
+                  <td>Printed by:</td>
+                  <td>'.$this->session->userdata('username').'</td>
+                </tr><br>
+                <tr>
+                  <td>Date/time: </td>
+                  <td>'.date('d-M-Y'). ' / ' . date('H;i;sa').'</td>
+                </tr>'; 
+          ?>
+      <table   style="width:100%;" class="table_detail">
+        <thead>
+          <tr >
+            <th width=""></th>
+            <th width="200px">CURRENT MONTH</th>
+            <th width="200px" >PREVIOUS MONTH</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <!-- PENDAPATAN -->
+          <tr>
+            <td style=" padding-left: 4em; font-size: 12px"><b>PENDAPATAN USAHA</b></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <?php
+            foreach ($income as $in) { 
+              foreach ($prevIncome as $pi) {
+                $previn = $pi->prev_income;
+                if ($in->coa_id == $pi->coa_id) {
+
+                }
+               };
+            
+              
+
+              
+          ?>
+            <tr>
+              <td style="padding-left: 6em"><?php echo $in->name_coa ?></td>
+              <td align="right"><?php echo number_format($in->income) ?></td>
+              <td align="right"><?php if (!empty($pi->prev_income)) {
+                  echo number_format($pi->prev_income);
+                } else {
+                  echo number_format(0);
+                } ?>
+                
+              </td>
+            </tr>
+          <?php } ?>
+          <!-- END OF PENDAPATAN -->
+
+          <!-- TOTAL PENDAPATAN -->
+          <tr>
+            <td></td>
+            <td><hr></td>
+            <td><hr></td>
+          </tr>
+          <?php
+            foreach ($sumIncome as $si) {
+              foreach ($sumPrevIncome as $spi) {
+                
+              }
+          ?>
+            <tr>
+              <td  style="padding-left: 20em"><B>TOTAL PENDAPATAN</B></td>
+              <td bgcolor="#f9f4f4" align="right">(i)...&nbsp<b><?php echo number_format($si->sum_income) ?></b></td>
+              <td bgcolor="#f9f4f4" align="right">(i)...&nbsp<b> <?php 
+                    if (!empty($pi->prev_income)) {
+                      echo number_format($spi->prev_sum_income);
+                    } else {
+                      echo number_format(0);
+                    }
+                   ?> </b> 
+             </td>
+            </tr>
+          <?php } ?>
+          <!-- END OF TOTAL PENDAPATAN -->
+
+          <!-- HPP -->
+          <tr>
+            <td style=" padding-left: 4em; font-size: 12px"><b>HARGA POKOK PENJUALAN</b></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <?php
+              foreach ($cogs as $cs) {
+                foreach ($prevCogs as $pc) {
+                  if ($pc->coa_id == $cs->coa_id) {
+
+                  }
+                }
+            ?>
+            <tr>
+              <td style="padding-left: 6em"><?php echo $cs->name_coa ?></td>
+              <td  bgcolor="#f9f4f4" align="center"><?php echo number_format($cs->cogs) ?></td>
+              <td  bgcolor="#f9f4f4" align="center">
+                  <?php 
+                    if (!empty($pc->prev_cogs)) {
+                      echo number_format($pc->prev_cogs);
+                    } else {
+                      echo number_format(0);
+                    }
+                   ?>
+
+              </td>
+            </tr>
+          <?php } ?>
+          <!-- END OF HPP -->
+
+          <!-- TOTAL HPP -->
+          <tr>
+            <td></td>
+            <td><hr></td>
+            <td><hr></td>
+          </tr>
+          <?php
+            foreach ($sumCogs as $sc) {  
+              foreach ($sumPrevCogs as $spc) {
+                        # code...
+                      }        
+          ?>
+            <tr>
+              <td  style="padding-left: 20em"><B>TOTAL HPP</B></td>
+              <td  bgcolor="#f9f4f4" align="right">(ii)...&nbsp<b><?php echo number_format($sc->sum_cogs) ?></b> </td>
+              <td  bgcolor="#f9f4f4" align="right">(ii)...&nbsp<b><?php echo number_format($spc->prev_sum_cogs) ?></b> </td>
+            </tr>
+          <?php } ?>
+          <!-- END OF TOTAL HPP -->
+
+          <!-- LABA KOTOR -->
+          <tr>
+            <td></td>
+            <td><hr class="style2"></td>
+            <td><hr class="style2"></td>
+          </tr>
+          <?php
+            $laba_kotor = 0;
+            $laba_kotor = $si->sum_income - $sc->sum_cogs;
+
+            $laba_kotor_prev = 0;
+            $laba_kotor_prev = $spi->prev_sum_income - $spc->prev_sum_cogs;
+           
+          ?>
+          <tr>
+            <td  style="padding-left: 20em"><B>LABA KOTOR</B></td>
+            <td bgcolor="#f9f4f4" align="right">(iii)...&nbsp<b><?php echo number_format($laba_kotor) ?></b> </td>
+            <td bgcolor="#f9f4f4" align="right">(iii)... &nbsp<b><?php echo number_format(0) ?></b></td>
+          </tr>
+          <!-- END OF LABA KOTOR -->
+
+          <!-- EXPENSE -->
+          <tr>
+            <td style=" padding-left: 4em; font-size: 12px"><b>BIAYA OPERASIONAL</b></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <?php
+              foreach ($expense as $ex) {
+                foreach ($prevExpense as $pe) {
+                 if ($ex->coa_id == $pe->coa_id) {
+                    break;
+                  }
+                }
+            ?>
+            <tr>
+              <td style="padding-left: 6em"><?php echo $ex->name_coa ?></td>
+              <td align="right"><?php echo number_format($ex->expense) ?></td>
+              <td align="right"><?php echo number_format($pe->prev_expense) ?></td>
+            </tr>
+          <?php } ?>
+          <!-- END OF EXPENSE -->
+
+
+          <!-- TOTAL EXPENSE -->
+          <tr>
+            <td></td>
+            <td><hr></td>
+            <td><hr></td>
+          </tr>
+          <?php
+            foreach ($sumExpense as $se) {
+              foreach ($sumPrevExpense as $spe) {
+                # code...
+              }
+           ?>
+            <tr>
+              <td style=" padding-left: 20em"><b>TOTAL BEBAN</b></td>
+              <td  bgcolor="#f9f4f4" align="right">(iv)...&nbsp<b><?php echo number_format($se->sum_expense) ?></b> </td>
+              <td  bgcolor="#f9f4f4" align="right">(iv)...&nbsp<b><?php echo number_format($spe->sum_prev_expense) ?></b> </td>
+            </tr>
+          <?php } ?>
+          <!-- END OF TOTAL EXPENSE -->
+
+
+          <!-- LABA BERSIH -->
+          <tr>
+            <td></td>
+            <td><hr class="style1"></td>
+            <td><hr class="style1"></td>
+          </tr>
+          <?php
+            $laba_bersih = 0;
+            $laba_bersih = $laba_kotor - $se->sum_expense;
+
+
+            $laba_bersih_prev = 0;
+            $laba_bersih_prev = $laba_kotor_prev - $spe->sum_prev_expense;
+          ?>
+          <tr>
+            <td style=" padding-left: 20em"><b>LABA / RUGI BERSIH</b></td>
+            <td  bgcolor="#f9f4f4" align="right">(v)...&nbsp <b><?php echo number_format($laba_bersih) ?></b> </td>
+            <td  bgcolor="#f9f4f4" align="right">(v)...&nbsp <b><?php echo number_format($laba_bersih_prev) ?></b> </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><hr class="style3"></td>
+            <td><hr class="style3"></td>
+          </tr>
+          <!-- END OF LABA BERSIH -->
+        </tbody>
+        <footer>
+            <th ></th>
+            <th ></th>
+            <th align="right"></th>
+        </footer>
+      </table>
+<td>*(i)+(ii)=(iii)<br>*(iii)+(iv)=(v)
+
+</td>
+    </div>
+  </div>
+
+<style type="text/css">
+hr.style2 {
+  border-top: 3px double black;
+}
+hr.style1 {
+  border-top: 3px double black;
+}
+hr.style3 {
+  border-top: 5px double black;
+}
+</style>
+
+</body>
+<!--     <?php
+            foreach ($category as $c) {
+                echo "<li>" . $c->CategoryName . "</li>";
+                foreach ($process as $r) {
+                    if($r['cat_id']==$c['id']){
+                      echo "<li><a href=\"" . base_url() . "index.php/process/id/" . $r->ProcessID . "\" target=\"_blank\">" . $r->ProcessName . "</a></li>";
+           }
+
+                }
+            }
+    ?> -->
+</html>
+                   
+              

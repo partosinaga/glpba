@@ -1,0 +1,24 @@
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+    width: 100%;
+    font: 11px normal Helvetica, Arial, sans-serif;
+
+}
+body {
+    background-color: #fff;
+    margin: 15px 15px 15px 15px;
+    font: 11px normal Helvetica, Arial, sans-serif;
+    color: #000000;
+}
+th {
+    border: 1px solid #000000;
+    padding: 5px;
+    background: #f3f3f3;
+    vertical-align: middle;
+    text-align: center;
+}
+.table-body tr td{
+  border: 1px solid #000000;
+  padding: 4px 4px 3px;
+}

@@ -1,0 +1,155 @@
+<?php
+class M_ap extends CI_Model{
+
+	
+
+	public function get_kode(){
+		$q = $this->db->query("select MAX(RIGHT(no_voucher,3)) as kt from ap_header");
+		$kd="";
+		$tgl= date("m/y");
+		if($q->num_rows()>0){
+			foreach ($q->result() as $k){
+				$tmp = ((int)$k->kt)+1;
+				$kd = sprintf("%03s", $tmp);
+			}
+		}else {
+			$kd = $tgl."001";
+		}
+		return $tgl."/".$kd;
+	}
+
+	public function get_ap(){
+		$data = $this->db->query("select ap_header.no_voucher, ap_header.date, ap_header.description, ap_header.total, ap_header.status, gl_header.Fclose
+			FROM ap_header
+			LEFT JOIN gl_header
+			on gl_header.reff_no = ap_header.no_voucher AND ap_header.description = gl_header.description AND ap_header.total = gl_header.total
+			ORDER BY ap_header.date DESC;");
+		return $data->result();
+	}
+
+	public function get_header($no_voucher){
+		$data = $this->db->query("select * from ap_header where no_voucher =  '".$no_voucher."' " );
+		return $data->result();
+	}
+
+	public function get_detail($no_voucher){
+		$data = $this->db->query(" SELECT ap_detail.coa_id, coa.name_coa, ap_detail.debit, ap_detail.credit
+			from ap_detail 
+			join coa
+			on ap_detail.coa_id = coa.coa_id
+			where ap_detail.no_voucher= '".$no_voucher."'; " );
+		return $data->result();
+	}
+	public function get_totalDetail($no_voucher){
+		$data = $this->db->query(" select SUM(ap_detail.debit) as total_debit, SUM(ap_detail.credit) as total_credit
+			from ap_detail 
+			join coa
+			on ap_detail.coa_id = coa.coa_id
+			where ap_detail.no_voucher= '".$no_voucher."';" );
+		return $data->result();
+	}
+	public function get_syspar(){
+		$data = $this->db->query("SELECT * from system_parameter " );
+		return $data->result();
+	}
+
+	public function get_postList(){
+		$data = $this->db->query("
+			select * from ap_header where status = 'post' OR status = 'unposted'
+		 ");
+		return $data->result();
+		
+	}
+	public function save_posting($noVoc,$posted_no){
+		$data = $this->db->query("update ap_header set status = 'posted', posted_no = '".$posted_no."' where no_voucher = '".$noVoc."' ; ");
+	}
+	public function save_glHead($data,$table){
+		$this->db->insert($table,$data);
+	}
+	public function save_glDetail($noVoc, $gl_no){
+		$result=$this->db->query("INSERT INTO gl_detail(gl_no, coa_id, debit, credit) 
+			SELECT '".$gl_no."', coa_id, debit, credit FROM ap_detail WHERE no_voucher = '".$noVoc."'  ");
+		return $result;
+	}
+
+	public function get_unposting(){
+		$data = $this->db->query("
+			SELECT
+				ap_header.no_voucher,
+				ap_header.date,
+				ap_header.description,
+				ap_header.total,
+				ap_header.gl_date,
+				ap_header.status,
+				gl_header.gl_no
+			FROM
+				ap_header
+			JOIN gl_header ON ap_header.no_voucher = gl_header.reff_no
+			WHERE
+				ap_header.status = 'posted' AND gl_header.Fmodule = 'ap'
+			ORDER BY
+				ap_header.no_voucher DESC
+			");
+		return $data->result();
+		
+	}
+
+	public function save_unposting($id){
+		$data = $this->db->query("update ap_header set status = 'unposted' where no_voucher = '".$id."' ; ");
+	} 
+
+	public function updateGLHposted($id){
+		$data = $this->db->query("update gl_header set status = 'unposted' where reff_no = '".$id."' AND Fmodule = 'ap' ; ");
+	} 
+
+	public function save_reposting($id){
+		$data = $this->db->query("update ap_header set status = 'posted' where no_voucher = '".$id."' ; ");
+	}
+
+	public function updateGLHunposted($id){
+		$data = $this->db->query("update gl_header set status = 'posted' where reff_no = '".$id."' AND Fmodule = 'ap'; ");
+	} 
+	public function save_upd_reposting($id, $posted_no){
+		$data = $this->db->query("update ap_header set status = 'posted', posted_no = '".$posted_no."' where no_voucher = '".$id."' ; ");
+	}
+
+	public function save_upd_reposting2($id, $posted_no){
+		$data = $this->db->query("update gl_header set status = 'posted', gl_no = '".$posted_no."' where reff_no = '".$id."' AND Fmodule = 'ap' ; ");
+	}
+
+
+	public function updateGlNoGlDetail($posted_no, $postedNo){
+		$data = $this->db->query("update gl_detail set gl_no = '".$posted_no."' where 
+		 gl_no = '".$postedNo."'  ");
+	}
+
+	public function get_aph_edit($no_voucher){
+		$data=$this->db->query("select * from ap_header where no_voucher = '".$no_voucher."' ");
+		return $data->result();
+	}
+	public function get_apd_edit($no_voucher){
+		$data=$this->db->query("SELECT ap_detail.no_voucher, ap_detail.coa_id, ap_detail.debit, ap_detail.credit, coa.name_coa
+			from ap_detail
+			join coa
+			on coa.coa_id = ap_detail.coa_id
+			 where ap_detail.no_voucher = '".$no_voucher."' ");
+		return $data->result();
+	}
+
+	public function save_update_aph($bank_id, $description, $curr_id, $total, $kurs, $paid_to, $no_cek, $gl_date, $no_voucher){
+		$data = $this->db->query(" update ap_header set bank_id = '".$bank_id."' , description = '".$description."' , curr_id = '".$curr_id."' , total= '".$total."' , kurs = '".$total."' , receive_from = '".$paid_to."' , no_cek = '".$no_cek."' , gl_date = '".$gl_date."' where no_voucher = '".$no_voucher."' ");
+	}
+
+	public function delete_apd_old($no_voucher){
+		$data = $this->db->query(" delete from ap_detail where no_voucher = '".$no_voucher."' ");
+	}
+	public function save_update_glh($total, $description, $gl_date, $no_voucher){
+		$data = $this->db->query(" update gl_header set gl_date = '".$gl_date."' , description = '".$description."' , total = '".$total."' where reff_no = '".$no_voucher."' AND Fmodule = 'ap' ");
+	}
+
+	public function delete_gld_old($no_voucher){
+		$data = $this->db->query(" delete from gl_detail where reff_no = '".$no_voucher."' 
+			AND gl_no like '4%'  ");
+	}
+}
+?>

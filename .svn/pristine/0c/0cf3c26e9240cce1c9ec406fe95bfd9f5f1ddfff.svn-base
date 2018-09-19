@@ -1,0 +1,182 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+class coa extends CI_Controller{
+	function __Construct(){
+	parent ::__construct();
+	$this->load->model('master/M_coa');
+
+		$this->load->helper('url');
+        
+    }
+
+	public function view_coa(){
+		$data['page']='master/view_coa';
+		$data['group'] = $this->M_coa->get_group();
+		$data['subgroup'] = $this->M_coa->get_subgroup();
+		$data['coa'] = $this->M_coa->get_coa();
+		//get form  table GROUP
+		$data['getGroup']= $this->db->get('group_coa');
+		//get form  table GROUP
+		$data['getSubgroup']= $this->db->get('subgroup');
+		$this->load->view('template/template', $data);
+	}
+
+	public function add_group(){
+		$group_id = $this->input->post('group_id');
+		$name = $this->input->post('name');
+
+		$data = array(
+			'group_id' => $group_id,
+			'name'=> $name,
+			);
+		$this->M_coa->add_group($data, 'group_coa');
+		$this->session->set_flashdata('success', 'ADDED');
+		redirect('master/coa/view_coa');
+	}
+
+	public function delete_group($group_id){
+		$this->db->where('group_id', $group_id);
+		$this->db->delete('group_coa');
+		$this->session->set_flashdata('success', 'DELETED');
+		redirect('master/coa/view_coa');
+	}
+
+	public function edit_group($group_id){
+		$data['page']='master/edit_group';
+		$data['group'] = $this->M_coa->get_group();
+		$data['editGroup'] = $this->M_coa->edit_group($group_id);
+		$this->load->view('template/template', $data);
+	}
+
+	public function save_edit(){
+		$group_id = $this->input->post('group_id');
+		$name = $this->input->post('name');
+
+		$data = array(
+			'group_id' => $group_id,
+			'name' => $name,
+			);
+
+		$this->M_coa->save_edit($group_id, $name);
+		$this->session->set_flashdata('message', array('info', 'fa-check',  'SUCCESS', 'UPDATED!'));
+		$this->session->set_flashdata('success', 'UPDATED');
+		redirect('master/coa/view_coa');
+	}
+
+	public function add_subgroup(){
+		$subgroup_id = $this->input->post('subgroup_id');
+		$name_sg = $this->input->post('name_sg');
+		$kelompok = $this->input->post('kelompok');
+
+		$data = array(
+			'subgroup_id' => $subgroup_id,
+			'name_sg' => $name_sg,
+			'kelompok' => $kelompok
+			);
+
+		$this->M_coa->add_subgroup($data, 'subgroup');
+		$this->session->set_flashdata('success', 'ADDED');
+		redirect('master/coa/view_coa#tab_1_2');
+	}
+
+	public function delete_subgroup($subgroup_id){
+		$this->db->where('subgroup_id', $subgroup_id);
+		$this->db->delete('subgroup');
+		$this->session->set_flashdata('success', 'DELETED');
+
+		redirect('master/coa/view_coa#tab_1_2');
+	}
+
+	public function edit_subgroup($subgroup_id){
+		$data['page']='master/edit_subgroup';
+		$data['group'] = $this->M_coa->get_group();
+		$data['subgroup'] = $this->M_coa->get_subgroup();
+		//get form  table GROUP
+		$data['getGroup']= $this->db->get('group_coa');
+		$data['editSubgroup'] = $this->M_coa->edit_subgroup($subgroup_id);
+		$this->load->view('template/template', $data);
+	}
+
+	public function save_edit_subgroup(){
+		$subgroup_id = $this->input->post('subgroup_id');
+		$name_sg = $this->input->post('name_sg');
+		$kelompok = $this->input->post('kelompok');
+
+		$data = array(
+			'subgroup_id' => $subgroup_id,
+			'name_sg' => $name_sg,
+			'kelompok' => $kelompok
+			);
+
+		$this->M_coa->save_edit_subgroup($subgroup_id, $name_sg, $kelompok);
+		$this->session->set_flashdata('success', 'UPDATED');
+		redirect('master/coa/view_coa#tab_1_2');
+	}
+
+	public function add_coa(){
+		$coa_id = $this->input->post("coa_id");
+		$name_coa = $this->input->post("name_coa");
+		$date = $this->input->post("date");
+		$subgroup = $this->input->post("subgroup");
+		$debit = $this->input->post("debit");
+		$credit = $this->input->post("credit");
+		$header = $this->input->post("header");
+		$active = $this->input->post("active");
+
+		$data=array(
+			'coa_id' => $coa_id,
+			'name_coa' => $name_coa,
+			'date' => $date,
+			'subgroup' => $subgroup,
+			'debit' => $debit,
+			'credit' => $credit,
+			'header' => $header,
+			'active' => $active,
+			);
+		$this->M_coa->add_coa($data, 'coa');
+		$this->session->set_flashdata('success', 'ADDED');
+		redirect('master/coa/view_coa#tab_1_3');
+	}
+
+	public function edit_coa($coa_id){
+		$data['page'] = 'master/edit_coa';
+
+		$data['getSubgroup']= $this->db->get('subgroup');//to get all in dropdown
+		$data['editCoa'] = $this->M_coa->get_data_edit($coa_id);
+		$this->load->view('template/template', $data);
+	}
+	public function save_edit_coa(){
+		$coa_id = $this->input->post("coa_id");
+		$name_coa = $this->input->post("name_coa");
+		$date = $this->input->post("date");
+		$subgroup = $this->input->post("subgroup");
+		$debit = $this->input->post("debit");
+		$credit = $this->input->post("credit");
+		$header = $this->input->post("header");
+		$active = $this->input->post("active");
+
+		$data=array(
+			'coa_id' => $coa_id,
+			'name_coa' => $name_coa,
+			'date' => $date,
+			'subgroup' => $subgroup,
+			'debit' => $debit,
+			'credit' => $credit,
+			'header' => $header,
+			'active' => $active,
+			);
+		// print_r($data);
+		// exit();
+		$this->M_coa->save_edit_coa($coa_id,$name_coa,$date,$subgroup,$debit,$credit,$header,$active);
+		$this->session->set_flashdata('success', 'UPDATED');
+		redirect('master/coa/view_coa#tab_1_3');
+	}
+	public function delete_coa($coa_id){
+		$this->db->where('coa_id', $coa_id);
+		$this->db->delete('coa');
+		$this->session->set_flashdata('success', 'DELETED');
+
+		redirect('master/coa/view_coa#tab_1_3');
+	}
+
+}

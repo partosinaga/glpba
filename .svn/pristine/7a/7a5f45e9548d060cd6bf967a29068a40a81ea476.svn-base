@@ -1,0 +1,32 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+class trial_balance extends CI_Controller{
+	function __Construct(){
+	parent ::__construct();
+	//$this->load->model('ap/M_ap');
+	$this->load->model('trial_balance/M_trial_balance');
+
+		$this->load->helper('url');
+		
+	}
+
+	public function tb_form(){
+		$data['page'] = 'trial_balance/tb_form';
+		$this->load->view('template/template', $data);
+	}
+
+	public function view_tb(){
+		$month = $this->input->post('month');
+		$year = $this->input->post('year');
+
+		$data['glHead'] = $this->M_trial_balance->get_gl_head($month, $year);
+		$data['total'] = $this->M_trial_balance->total($month, $year);
+
+
+		$data['month'] = $month;
+		$data['year'] = $year;
+	//	$data['page'] = 'trial_balance/view_tb';
+		$this->load->view('trial_balance/view_tb', $data);
+	}
+
+}

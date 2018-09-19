@@ -1,0 +1,36 @@
+<?php
+class M_unclose_month extends CI_Model{
+
+	public function unclose_month(){
+		$data = $this->db->query(" select DISTINCT(month(gl_header.gl_date)) as month, year(gl_header.gl_date) as year
+			from gl_header
+			where Fclose = 'close'
+			ORDER BY year(gl_header.gl_date)");
+		return $data->result();
+	}
+
+	public function unclose($period){
+		$data = $this->db->query("update gl_header 
+				set Fclose = 'unclose' 
+				where gl_date like '".$period."%'");
+	}
+
+	public function get_last(){
+		$data = $this->db->query("select max(month(gl_header.gl_date)) as month, year(gl_header.gl_date) as year
+			from gl_header
+			where Fclose = 'close'
+			ORDER BY year(gl_header.gl_date)");
+		return $data->result();
+	}
+
+	public function update_closed_date($period){
+		$data= $this->db->query("update closed_month set status = 'unclosed' where date_closed = '".$period."' ");
+		// return $data->result();
+	}
+	
+	
+
+	
+
+}
+?>

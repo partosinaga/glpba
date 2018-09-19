@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Balance Sheet</title>
+  <link href="<?php echo base_url(); ?>resource/balance_sheet.css" rel="stylesheet" type="text/css"/>
+  <link href="<?php echo base_url(); ?>resource/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+  <script src="<?php echo base_url(); ?>resource/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script>
+  function printContent(el){
+      var restorepage = document.body.innerHTML;
+      var printcontent = document.getElementById(el).innerHTML;
+      document.body.innerHTML = printcontent;
+      window.print();
+      document.body.innerHTML = restorepage;
+  }
+</script>
+<?php
+    $sql ="SELECT * FROM system_parameter";
+     $query = $this->db->query($sql);
+      if ($query->num_rows() > 0) {
+        foreach ($query->result() as $row) {?>
+        <b value="<?php echo $row->company_id;?>">
+<?php } } ?>
+</head>
+<a onclick="printContent('div1')" >
+  <button style="background-color: #cc0000" type="button" class="btn btn-block btn-primary btn-flat"><h3>Print</h3></button>
+</a>
+<body>
+  <div id="div1">
+    
+    <div>  
+        <table >
+          <tr>
+            <td class="text-center" style="padding-top: 10px;  font: 20px normal Helvetica, Arial, sans-serif;"><strong><?php echo strtoupper($row->name); ?></strong></td>
+          </tr>
+          <tr>
+            <td class="text-center" style="padding-top: 10px; font: 15px normal Helvetica, Arial, sans-serif;"><strong>BALANCE SHEET</strong></td>
+          </tr>
+          <tr>
+            <td class="text-center" style="font-size:9pt ">
+              (<?php   
+                
+                echo $date_from.' to '.$date_to;
+              ?>)
+            </td>
+          </tr>
+        </table>
+    </div>
+
+    <div id="body">
+      <?php 
+
+              echo '
+                <tr align="right">
+                  <td>Printed by:</td>
+                  <td>'.$this->session->userdata('username').'</td>
+                </tr><br>
+                <tr>
+                  <td>Date/time: </td>
+                  <td>'.date('d-M-Y'). ' / ' . date('H;i;sa').'</td>
+                </tr>'; 
+          ?>
+      <table   style="width:100%;" class="table_detail">
+        <thead>
+          <tr >
+            <th width=""></th>
+            <th width="120px">CURRENT MONTH</th>
+            <th width="120px" >PREVIOUS MONTH</th>
+          </tr>
+        </thead>
+        <tbody>
+<!-- ASSETS -->
+          <tr>
+            <td style=" padding-left: 4em; font-size: 12px" ><b><u>ASSETS</u></b></td>
+            <td></td>
+            <td></td>
+          </tr>
+            <?php 
+              $group='';
+              foreach ($bsheet as $bs) { // GET EACH ROW
+              foreach ($prevsaldo as $prs) { //TO GET PREV SALDO (SUM TO EACH ROW)
+                if ($bs->coa_id == $prs->coa_id) {
+                  break;
+                }
+              };
+
+              foreach ($prev as $pr) { //GET PREVIOUS MONTH
+                if ($bs->coa_id == $pr->coa_id) { // TO GET PREVIOUS MONTH
+                  break;
+               };
+              };
+            ?>
+            <?php          
+              $result = '';   
+              if ($bs->kelompok == 1) { //TO CHECK DEBIT OR CREDIT
+                
+                
+                if ($group != $bs->subgroup_id) {
+                  $result .= '
+                    <tr>
+                      <td style="padding-left: 6em; font-size: 11px "><b>'. strtoupper($bs->name_sg).'</b></td>
+                      <td></td>
+                      <td></td>
+                    </tr>';
+                  $group=$bs->subgroup_id;
+                  } else {
+                    $result .= '';
+                  };    
+                             
+                    $result .='
+                      <tr>
+                        <td style="padding-left: 8em;">'.$bs->name_coa.'</td>
+                        <td align="right">'.number_format($bs->saldo + $prs->prevBalance).'</td>
+                        <td align="right">'.number_format($pr->previous).'</td>
+                      </tr>
+                    ';
+                     
+              } else {
+                $result .= '';
+              }
+              echo $result;
+            ?>
+          <?php }; ?>
+<!-- END OF ASSETS -->
+            
+<!-- LIABILITIES -->
+          
+          <tr>
+            <td style="padding-left: 4em; font-size: 12px" ><b> <u>LIABILITIES</u></b></td>
+            <td></td>
+            <td></td>
+          </tr>
+            <?php 
+              $group='';
+              foreach ($bsheet as $bs) {
+                foreach ($prevsaldo as $prs) { //TO GET PREV SALDO (SUM TO EACH ROW)
+                if ($bs->coa_id == $prs->coa_id) {
+                  break;
+                }
+              };
+              foreach ($prev as $pr) {
+                if ($bs->coa_id == $pr->coa_id) {
+                  break;
+                };
+              };
+            ?>
+            <?php              
+              $result = '';
+              if ($bs->kelompok == 2 OR $bs->kelompok == 3 OR $bs->kelompok == 4) {
+                    if ($group != $bs->subgroup_id) {
+                      
+                    $result .= '
+                      <tr>
+                        <td style="padding-left: 6em; font-size: 11px "><b>'. strtoupper($bs->name_sg).'</b></td>
+                        <td></td>
+                        <td></td>
+                      </tr>';
+                    $group=$bs->subgroup_id;
+                    } else {
+                      $result .= '';
+                    };
+                $result .='
+                  <tr>
+                    <td style="padding-left: 8em;">'.$bs->name_coa.'</td>
+                    <td align="right">'.number_format($bs->saldo + $prs->prevBalance ).'</td>
+                    <td align="right">'.number_format($pr->previous).'</td>
+                  </tr>';
+              } else {
+                $result .= '';
+              }
+              echo $result;
+            ?>
+          <?php }; ?>
+<!-- END OF LIABILITIES -->
+        </tbody>
+        <footer>
+            <th ></th>
+            <th ></th>
+            <th align="right"></th>
+        </footer>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
+                
+                 
+              

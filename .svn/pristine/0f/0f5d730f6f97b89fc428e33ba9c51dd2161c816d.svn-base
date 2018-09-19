@@ -1,0 +1,30 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+class unclose_month extends CI_Controller{
+	function __Construct(){
+	parent ::__construct();
+	//$this->load->model('ap/M_ap');
+	$this->load->model('unclose_month/M_unclose_month');
+
+		$this->load->helper('url');
+		
+	}
+
+	public function unclose_month_form(){
+		$data['page'] = 'unclose_month/unclose_month_form';
+		$data['unclose'] = $this->M_unclose_month->unclose_month();
+		$data['last'] = $this->M_unclose_month->get_last();
+		$this->load->view('template/template', $data);
+	}
+
+	public function unclose(){
+		$period = $this->input->post('period');
+		
+		$this->M_unclose_month->update_closed_date($period);
+
+		$data = $this->M_unclose_month->unclose($period);
+		$this->session->set_flashdata('success', 'Success unclose ' .$period.'!');
+		redirect('unclose_month/unclose_month/unclose_month_form');
+	}
+
+}

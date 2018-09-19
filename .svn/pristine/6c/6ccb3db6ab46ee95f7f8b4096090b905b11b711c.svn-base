@@ -1,0 +1,52 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class home extends CI_Controller {
+
+	public function dashboard()
+	{
+		$data['page']='template/dashboard';
+		$this->load->view('template/template', $data);
+	}
+	public function index()
+	{
+		$this->load->view('login/form_login');
+	}
+
+	public function valid_login(){
+		
+		$us = $this->input->post('username');
+		$ps = $this->input->post('password');
+		
+		$this->db->where('username', $us);	//nama kolom username pada form
+		$this->db->where('password', $ps);	//nama kolom password pada form
+		$akun = $this->db->get('user');
+		if ($akun->num_rows() >0){ 
+			
+			$logindata = array(
+				'user_id' => $akun->result_array()[0]['user_id'],
+				'username'  => $us,
+				'departemen'     => $akun->result_array()[0]['departemen'],
+				'AREntry'     => $akun->result_array()[0]['AREntry'],
+				'ARPost'     => $akun->result_array()[0]['ARPost'],
+				'APEntry'     => $akun->result_array()[0]['APEntry'],
+				'APPost'     => $akun->result_array()[0]['APPost'],
+				'GLEntry'     => $akun->result_array()[0]['GLEntry'],
+				'GLPost'     => $akun->result_array()[0]['GLPost'],
+				'reportACC'     => $akun->result_array()[0]['reportACC'],
+				'adminACC'     => $akun->result_array()[0]['adminACC'],
+				'logged_in' => TRUE
+			);
+			$this->session->set_userdata($logindata);
+			redirect('home/dashboard');
+
+			} else { 
+			redirect ('home/index');
+		}
+	}
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect('home/index');
+	}
+}

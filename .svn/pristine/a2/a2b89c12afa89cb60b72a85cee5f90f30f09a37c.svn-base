@@ -1,0 +1,38 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed');
+
+class subs_ledger extends CI_Controller{
+	function __Construct(){
+	parent ::__construct();
+	//$this->load->model('ap/M_ap');
+	$this->load->model('subs_ledger/M_subs_ledger');
+
+		$this->load->helper('url');
+		
+	}
+
+	public function subs_ledger_form(){
+		$data['page'] = 'subs_ledger/subs_ledger_form';
+		$data['coa'] = $this->db->get('coa');
+		$this->load->view('template/template', $data);
+	}
+
+	public function view_sl(){
+		$date_from = $this->input->post('date_from');
+		$date_to = $this->input->post('date_to');
+		$coa_from = $this->input->post('coa_from');
+		$coa_to = $this->input->post('coa_to');
+
+		// $data = array();
+		$data['subsled'] = $this->M_subs_ledger->get_trans($date_from, $date_to, $coa_from, $coa_to);
+		// echo $this->db->last_query();
+		$data['balance'] = $this->M_subs_ledger->get_begining_balance($date_from, $date_to, $coa_from, $coa_to);
+
+		
+		$data['date_from'] = $date_from;
+		$data['date_to'] = $date_to;
+		$data['coa_from'] = $coa_from;
+		$data['coa_to'] = $coa_to;
+		//$data['page'] = 'subs_ledger/view_sl';
+		$this->load->view('subs_ledger/view_sl', $data);
+	}
+}
