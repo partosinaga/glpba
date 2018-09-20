@@ -60,7 +60,7 @@ class ap extends CI_Controller
 //        INSERT TAG
             $data_tag = array();
             $tag_id = $this->input->post('tag');
-            if(!isset($tag_id) ){
+            if(isset($tag_id) ){
                 for ($i = 0; $i < count($tag_id); $i++) {
                     $data_tag[$i] = array(
                         'no_voucher' => $data['no_voucher'],
@@ -425,8 +425,8 @@ class ap extends CI_Controller
         $this->db->trans_start();
         $valid = true;
         $id = $this->input->post("nv");
-        echo $gl_date = $this->input->post("gl_date");
-        echo $postedNo = $this->input->post("postedNo");
+        $gl_date = $this->input->post("gl_date");
+        $postedNo = $this->input->post("postedNo");
 
         $q = $this->db->query("
 			  SELECT
@@ -490,6 +490,8 @@ class ap extends CI_Controller
             $this->db->trans_rollback();
             $this->session->set_flashdata('error', 'Reposting Failed, Try again later(3)');
         }
+
+        redirect('ap/ap/posting');
 
     }
 

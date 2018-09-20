@@ -9,14 +9,14 @@
 
 
       <section class="content">
-       
+
         <div class="box box-success">
           <div class="box-header with-border" align="center">
             <h3 class="box-title"><i class="fa fa-tag" ></i> Unposting Payment Voucher</h3>
           </div><br>
 
           <div align="center">
-            <label class="mt-checkbox">CHECK ALL                     
+            <label class="mt-checkbox">CHECK ALL
               <input type="checkbox" value="1" name="test" onchange="checkAll(this)" name="chk[]" />
               <span></span><br>
             </label><br>
@@ -28,7 +28,7 @@
             <div class="page-content-inner">
               <table id="example" class="table table-striped table-bordered" cellspacing="0">
                       <thead bgcolor="#E7505A">
-                        
+
                         <tr>
                            <th  class="text-center" width="10px" ></th>
                           <th class="text-center" width="100px">NO. VOUCHER</th>
@@ -40,26 +40,26 @@
                           <th class="text-center" width="50px" >STATUS</th>
                           <th class="text-center" width="80px" >ACTION</th>
                       </tr>
-                        
+
                       </thead>
                       <tbody>
 
-                        <?php 
-                          
+                        <?php
+
                           foreach ($unpostlist as $p) {
-                            ?>                        
+                            ?>
                         <tr>
                           <td align="center">
                             <?php
                               if ($p->Fclose == 'close') {
                                 echo '<i class="fa fa-times" aria-hidden="true" title="Confirmation Nedded"></i>';
                               } else {
-                                echo '  
+                                echo '
                                     <input type="checkbox" gl-no = "'.$p->gl_no.'" class="chk" value="'.$p->no_voucher.'" name = "nov[]" />
                                     <span></span>
                                 ';
                               }
-                              
+
                             ?>
                           </td>
                           <td class="text-center"><?php echo $p->no_voucher ?></td>
@@ -93,11 +93,11 @@
                                     <a href="#'.$nv.'"> <button align="center" class="btn red blue-soft-stripe pull-right btn-xs "> <i class="fa fa-bookmark-o"></i> Uposting</button></a>
                                   </td>';
                                 }
-                            
+
                           ?>
-                          
+
                         </tr>
-                        
+
 <!--MODAL CONFIRMATION-->
 <div id="<?php echo $p->no_voucher ?>" class="modalDialog">
   <div>
@@ -112,7 +112,7 @@
            <button type="button" class="btn btn-success"><i class="fa fa-check"></i> OK</button>
           </a>
 
-          <a href="#close" title="Close" > 
+          <a href="#close" title="Close" >
             <button type="button" data-dismiss="modal" form="form1" class="btn btn-danger"><i class="fa fa-remove"></i> Cancel</button>
           </a>
       <div>
@@ -127,8 +127,8 @@
 
 
                       </tbody>
-                        
-                    </table>    
+
+                    </table>
             </div>
           </div>
 
@@ -176,7 +176,7 @@ function getCheckedValue(){
     gln.push($(this).attr("gl-no"));
     check.push($(this).val());
   });
-  
+
   if (check.length <= 1) {
     alert('Ups!, Select more than One Voucher')
   } else {
