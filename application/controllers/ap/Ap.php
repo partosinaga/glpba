@@ -171,10 +171,6 @@ class ap extends CI_Controller
 
                 <div class="row">
                     <div class="col-md-3">
-                      <label>Paid To</label><br>
-                      ' . $row->receive_from . '
-                    </div>
-                    <div class="col-md-3">
                       <label>NO.CEL/GIRO</label><br>
                     ' . $row->no_cek . '
                     </div>

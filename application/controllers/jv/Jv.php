@@ -166,10 +166,6 @@ class jv extends CI_Controller
                     </div><br>
                     <div class="row">
                         <div class="col-md-3">
-                          <label>Receive from/Paid To</label><br>
-                          ' . $row->receive_from . '
-                        </div>
-                        <div class="col-md-3">
                           <label>GL. DATE</label><br>
                           ' . $row->gl_date . '
                         </div>
